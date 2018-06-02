@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "539267389316",
+    "firebase_url": "https://ceuapp-8ef2a.firebaseio.com",
+    "project_id": "ceuapp-8ef2a",
+    "storage_bucket": "ceuapp-8ef2a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:539267389316:android:2bd68f2ec68a0b70",
+        "android_client_info": {
+          "package_name": "com.cit.ceuapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "539267389316-b1vs7fee3ooekn8qeaosbnk57mda9p0g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBk6SnQDfNG9AU6UaDOhCJ7RBfIOqKtTIw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

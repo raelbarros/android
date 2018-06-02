@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/cl_main_body"
+    tools:context="com.cit.ceuapp.MainActivity">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/tv_main_account"/>
+
+    <android.support.v7.widget.AppCompatButton
+        android:layout_width="112dp"
+        android:layout_height="56dp"
+        android:text="Sair"
+        android:id="@+id/bt_main_sign_out"
+        android:layout_marginTop="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp"
+        android:onClick="bt_main_sign_out"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:layout_width="112dp"
+        android:layout_height="56dp"
+        android:text="@string/profile"
+        android:id="@+id/bt_main_profile"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="8dp"
+        android:onClick="bt_main_profile"
+        app:layout_constraintLeft_toRightOf="@id/bt_main_sign_out"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
+</android.support.constraint.ConstraintLayout>

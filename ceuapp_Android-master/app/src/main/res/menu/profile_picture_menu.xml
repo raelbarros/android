@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/profile_picture_menu_open_photo"
+        android:title="@string/open_photo"
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/profile_picture_menu_change_photo"
+        android:title="@string/change_photo"
+        app:showAsAction="ifRoom"/>
+
+</menu>

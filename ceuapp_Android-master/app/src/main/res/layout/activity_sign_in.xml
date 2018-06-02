@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/cl_sign_in_body"
+    tools:context="com.cit.ceuapp.SignInActivity">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/iv_sign_in_logo"
+        android:layout_width="250dp"
+        android:layout_height="80dp"
+        android:src="#CCC"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.2"/>
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/et_sign_in_email"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginLeft="@dimen/horizontal_margin"
+        android:layout_marginRight="@dimen/horizontal_margin"
+        android:layout_marginTop="112dp"
+        android:hint="@string/email"
+        android:background="@drawable/edittext_gray"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
+        android:inputType="textEmailAddress"
+        android:alpha="0.6"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_sign_in_logo" />
+
+    <android.support.v7.widget.AppCompatEditText
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginLeft="@dimen/horizontal_margin"
+        android:layout_marginRight="@dimen/horizontal_margin"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:inputType="textPassword"
+        android:hint="@string/password"
+        android:background="@drawable/edittext_gray"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
+        android:alpha="0.6"
+        android:id="@+id/et_sign_in_password"
+        android:layout_marginTop="@dimen/vertical_margin"
+        app:layout_constraintTop_toBottomOf="@id/et_sign_in_email"/>
+
+    <android.support.v7.widget.AppCompatButton
+        android:layout_width="112dp"
+        android:layout_height="56dp"
+        android:text="@string/access"
+        android:id="@+id/bt_sign_in_access"
+        android:layout_marginTop="@dimen/vertical_margin"
+        android:background="@drawable/button_blue"
+        android:textColor="@android:color/white"
+        android:onClick="bt_sign_in_access"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_sign_in_password"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
