@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.CadastroActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <Button
+            android:id="@+id/btnVoltar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="26dp"
+            android:text="Voltar" />
+
+        <TextView
+            android:id="@+id/lblNome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="49dp"
+            android:text="Nome" />
+
+        <EditText
+            android:id="@+id/txtNome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lblNome"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/lblCPF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/lblNome"
+            android:layout_below="@+id/txtNome"
+            android:text="CPF" />
+
+        <EditText
+            android:id="@+id/txtCPF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/lblCPF"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:singleLine="false" />
+
+        <TextView
+            android:id="@+id/lblIdade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/lblNome"
+            android:layout_below="@+id/txtCPF"
+            android:text="Idade" />
+
+        <EditText
+            android:id="@+id/txtIdade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lblIdade"
+            android:ems="10"
+            android:inputType="numberDecimal" />
+
+        <TextView
+            android:id="@+id/lblTel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/lblNome"
+            android:layout_below="@+id/txtIdade"
+            android:text="Telefone" />
+
+        <EditText
+            android:id="@+id/txtTel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lblTel"
+            android:ems="10"
+            android:inputType="numberDecimal" />
+
+        <TextView
+            android:id="@+id/lblEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/lblNome"
+            android:layout_below="@+id/txtTel"
+            android:text="E-mail" />
+
+        <EditText
+            android:id="@+id/txtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lblEmail"
+            android:ems="10"
+            android:inputType="textWebEmailAddress" />
+
+        <Button
+            android:id="@+id/btnSalvar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btnListar"
+            android:layout_centerHorizontal="true"
+            android:text="Salvar" />
+
+        <Button
+            android:id="@+id/btnListar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btnVoltar"
+            android:layout_centerHorizontal="true"
+            android:text="Listar Registros" />
+
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>
