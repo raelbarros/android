@@ -64,4 +64,7 @@ public class Cliente {
     public void setCelularCliente(String celularCliente) {
         this.celularCliente = celularCliente;
     }
+
+
+    //teste
 }
