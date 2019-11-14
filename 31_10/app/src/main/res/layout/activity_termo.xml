@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ConstraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Termo">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:text="Termo de Responsabilidade"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/txtDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Termo de Responsabilidade de Uso de Software Termo de Responsabilidade de Uso de Software  Com base na Lei de Softwares nº 9.609/98, este é um Termo de Responsabilidade de Uso de Software entre o utilizador final do software e {autor}, autor e detentor dos direitos autorais do software {software}, doravante denominada simplesmente de Autor.  Por favor, leia atentamente este documento.    Caso não aceite o Termo de Responsabilidade nos termos e condições descritas, pare imediatamente de utilizar este software. Caso tenha instalado, desinstale o produto imediatamente ou após o término do período de avaliação. Para isso o software contém seu próprio desinstalar e/ou instruções de remoção. O período para testes é de 7 dias, não efetue nenhum pagamento antes de confirmar se o software funciona corretamente e atende suas expectativas. Não haverá devolução de valores em hipótese nenhuma.    1.    Termo de Utilização. O {software} é um software brasileiro, de propriedade da empresa VOXSTREAM Streaming Profissional, com sede em Minas Gerais, registrado no INPI – Instituto Nacional de Propriedade Industrial. {inpi} O software é licenciado e não vendido. A Licença do {software} é de uso não-exclusivo e intransferível. Assinatura da licença é válida por tempo indeterminado, EXCETO nos casos de formatação, atualização ou troca de máquina, será necessário revalidar a licença. A licença refere-se a 1 (um) aplicativo por cada máquina. Em razão de existir um tempo para o usuário testar o aplicativo, em que o mesmo fica ciente das suas funcionalidades, não haverá, qualquer que seja o motivo, devolução ou reembolso do valor da licença.    2.    Direitos de Autor (copyright). O software especificado neste Termo de Responsabilidade é e continuará a ser propriedade do Autor. O mesmo software está sujeito aos direitos de Autor e como tal está protegido em todas as extensões permitidas por lei.  3.    Transferência da Licença. Esta licença é exclusiva da empresa ou utilizador que a comprou, não sendo permitido vender, revender, representar, emprestar, trocar, doar, leiloar, consignar ou transferir de qualquer maneira qualquer cópia deste software. Qualquer transferência que viole este Termo de Responsabilidade cancelará automaticamente a licença.    4.    Backup. O aplicativo conta com ferramenta ou meios para fazer Backup. Fica o usuário responsável em manter os dados salvos em uma mídia de sua responsabilidade.    5.    Instalação de Múltiplas licenças. Cada cópia do software deve ser instalada em apenas um computador. Quando se compra uma licença múltipla, apenas o número de usuários-desenvolvedores permitidos é definido pelo tipo de licenciamento.    6.    Responsabilidades. Em nenhuma hipótese o Autor será responsável, por danos causados ou por perda de lucros, incluindo, sem qualquer limitação, danos especiais causados por parada do trabalho, perda de dados causados pela utilização e uso inadequado deste software, ainda que o Autor tenha sido avisado acerca desta possibilidade ou de tais danos ou perdas. Ao aceitar este Termo de Responsabilidade, o cliente aceita que a responsabilidade do Autor pelos danos causados pela utilização ou pelo uso inadequado deste software fica limitado nesse item.    7.    Do Software: Desde a instalação o usuário, ou cliente fica ciente, da forma do software 'ASSIM COMO ESTÁ', termo usado e válido em licenças de software, não podendo reclamar, posteriormente de falta de funções ou módulos, sendo que qualquer pedido de alteração, deverá ser encaminhado ao autor, que fará análises, sem entretanto garantir a alteração.  8.    Do Suporte: O licenciamento do software não inclui direito a suporte técnico do seu uso. Este poderá ser contratado em separado, e será fornecido nas condições e pelo período contratado.    9.    Do Upgrade: O licenciamento do software dá direiro de atualização técnica (upgrade), incluindo novas funcionalidades e/ou versões que venham a ser disponibilizadas pelo autor, pelo período de um ano, contado da data de aquisição do direito de uso do software. A contratação de novos períodos de upgrade poderá ser feita, após o primeiro ano, nos termos e condições vigentes à época da nova contratação.    10.    Restrições de Utilização. O software não pode ser usado em qualquer situação que viole os direitos de autor. Isto inclui fazer cópias (exceto de backup), reprodução, modificação, engenharia reversa, técnicas de desmontagem fazendo produtos derivados do software ou qualquer outro método de descodificação. Todos os direitos não expressamente garantidos são reservados ao Autor. Todas as cópias do software permitidas neste Licenciamento devem conter todos os direitos do Autor e uma cópia original do mesmo.    11.    Leis e cláusulas de arbitragem. Este Termo de Responsabilidade está de acordo com as leis vigentes no Brasil. Fica eleito o Foro da cidade de {cidade}, {uf}, para toda e qualquer disputa sobre este Termo de Responsabilidade ou algo relacionado com o mesmo.  O Autor se reserva o direito de alterar os termos de responsabilidade do uso de software;"
+                android:textColor="#000000" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="53dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnReject"
+                    android:layout_width="211dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#FF0006"
+                    android:text="Recusar"
+                    android:textColor="#FFFFFF" />
+
+                <Button
+                    android:id="@+id/btnAccept"
+                    android:layout_width="167dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="#A4C639"
+                    android:text="Aceitar"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
