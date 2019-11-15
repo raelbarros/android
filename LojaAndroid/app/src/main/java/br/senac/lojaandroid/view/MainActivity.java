@@ -19,6 +19,9 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private ActionBarDrawerToggle actionBarDrawerToggle;
 
+    Home home;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
         drawerLayout = findViewById(R.id.drawer);
         navigationView = findViewById(R.id.navegation_view);
+
+        home = new Home();
+        getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, home).commit();
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -46,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, compras).commit();
                     return true;
                 } else if (menuItem.getItemId() == R.id.action_home) {
-
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, home).commit();
                 }
 
                 return false;

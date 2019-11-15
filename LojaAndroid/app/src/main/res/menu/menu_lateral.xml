@@ -2,16 +2,27 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group
-        android:id="@+id/menuLateral"
-        android:checkableBehavior="single">
-        <item
-            android:id="@+id/action_home"
-            android:checkable="false"
-            android:title="Home" />
-        <item
-            android:id="@+id/action_compras"
-            android:checkable="false"
-            android:title="ompras" />
-    </group>
+    <item
+        android:id="@+id/action_home"
+        android:checkable="true"
+        android:title="Home" />
+    <item
+        android:id="@+id/action_compras"
+        android:checkable="true"
+        android:title="Compras" />
+    <item android:title="Minha Conta">
+        <menu>
+            <item android:title="Meus dados" />
+        </menu>
+    </item>
+    <item android:title="Sobre" >
+        <menu >
+            <item android:title="Sobre" />
+        </menu>
+    </item>
+    <item android:title="Sair">
+        <menu>
+            <item android:title="Logout" />
+        </menu>
+    </item>
 </menu>
