@@ -11,7 +11,6 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -43,7 +42,7 @@ public class Home extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        mainLayout = view.findViewById(R.id.mainLayout);
+        mainLayout = view.findViewById(R.id.itensLayout);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://oficinacordova.azurewebsites.net/")
@@ -75,7 +74,7 @@ public class Home extends Fragment {
 
 
     private void addCard(String nome, final int id) {
-        final CardView cardview = (CardView) LayoutInflater.from(getActivity()).inflate(R.layout.card_category, mainLayout, false);
+        final CardView cardview = (CardView) LayoutInflater.from(getActivity()).inflate(R.layout.cardcategory_layout, mainLayout, false);
         TextView nomeCategoria = cardview.findViewById(R.id.nomeCategoria);
 
         nomeCategoria.setText(nome);

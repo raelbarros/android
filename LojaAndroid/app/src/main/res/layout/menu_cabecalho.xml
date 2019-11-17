@@ -2,21 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="192dp"
-    android:background="#96FFBF"
+    android:background="@drawable/gradient_color"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:screenOrientation="portrait">
 
     <TextView
         android:id="@+id/txtLogar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto_thin"
+        android:fontFamily="@font/roboto"
         android:text="Entrar"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="24sp"
-        android:textStyle="bold"
         android:typeface="normal" />
 
 </LinearLayout>
