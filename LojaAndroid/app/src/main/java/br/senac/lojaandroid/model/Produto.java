@@ -2,9 +2,9 @@ package br.senac.lojaandroid.model;
 
 public class Produto {
     private double descontoPromocao, precProduto;
-    private String nomeProduto;
+    private String nomeProduto, descProduto;
     private int idCategoria, idProduto, qtdMinEstoque;
-    private boolean ativoProduto, descProduto;
+    private boolean ativoProduto;
 
     public Produto () {
 
@@ -66,11 +66,11 @@ public class Produto {
         this.ativoProduto = ativoProduto;
     }
 
-    public boolean isDescProduto() {
+    public String getDescProduto() {
         return descProduto;
     }
 
-    public void setDescProduto(boolean descProduto) {
+    public void setDescProduto(String descProduto) {
         this.descProduto = descProduto;
     }
 }

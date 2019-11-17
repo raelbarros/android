@@ -12,6 +12,9 @@ public interface ApiProduto {
     @GET("/android/rest/produto")
     Call<List<Produto>> getProdutos();
 
+    @GET("/android/rest/produto/{id}")
+    Call<Produto> getProduto(@Path("id") Integer id);
+
     @GET("/android/rest/produto/categoria/{id}")
     Call<List<Produto>> getProdutoByCategoria(@Path("id") Integer id);
 }

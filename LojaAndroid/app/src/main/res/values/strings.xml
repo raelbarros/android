@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LojaAndroid</string>
+    <string name="app_name">Pet-Android</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="openDrawer">Abrir Menu</string>
     <string name="closeDrawer">Fechar Menu</string>
