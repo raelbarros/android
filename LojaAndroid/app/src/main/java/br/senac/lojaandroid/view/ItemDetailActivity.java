@@ -31,10 +31,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ItemDetailActivity extends AppCompatActivity {
 
-    TextView txtProduto, txtPreco, txtDescricao, txtPrecoCDesc;
+    TextView txtProduto, txtPreco, txtDescricao, txtPrecoCDesc, titleDescricao;
     Button btnAdd;
     ImageView imgProduto;
     ProgressBar loader;
+    View view1, view2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,10 @@ public class ItemDetailActivity extends AppCompatActivity {
         txtPrecoCDesc = findViewById(R.id.txtPrecoCDesc);
         btnAdd = findViewById(R.id.btnAdd);
         imgProduto = findViewById(R.id.imgDetailProd);
+        view1 = findViewById(R.id.view1);
+        view2 = findViewById(R.id.view2);
+        titleDescricao = findViewById(R.id.titleDescricao);
+
         loader = findViewById(R.id.loader);
 
         loader.setVisibility(View.VISIBLE);
@@ -88,13 +93,13 @@ public class ItemDetailActivity extends AppCompatActivity {
 
                         Double precoTotal = p.getPrecProduto() - p.getDescontoPromocao();
 
-                        SpannableString preco = new SpannableString("DE - " + format.format(p.getPrecProduto()));
+                        SpannableString preco = new SpannableString(format.format(p.getPrecProduto()));
                         preco.setSpan(new BackgroundColorSpan(Color.YELLOW), 0, preco.length(), 0);
 
-                        txtPreco.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f);
+                        txtPreco.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15f);
                         txtPreco.setTextColor(Color.RED);
                         txtPreco.setText(preco);
-                        txtPrecoCDesc.setText("POR - " + format.format(precoTotal));
+                        txtPrecoCDesc.setText("Por " + format.format(precoTotal));
 
                         txtProduto.setText(p.getNomeProduto());
                         txtDescricao.setText(p.getDescProduto());
@@ -103,9 +108,12 @@ public class ItemDetailActivity extends AppCompatActivity {
                         ImageLoader imageLoader = ImageLoader.getInstance();
                         imageLoader.init(ImageLoaderConfiguration.createDefault(ItemDetailActivity.this));
                         imageLoader.displayImage(url, imgProduto);
+
+
                     }
 
                     loader.setVisibility(View.GONE);
+                    setItensVisible();
                 } catch (Throwable t) {
 
                 }
@@ -119,5 +127,17 @@ public class ItemDetailActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    public void setItensVisible(){
+        imgProduto.setVisibility(View.VISIBLE);
+        view1.setVisibility(View.VISIBLE);
+        txtProduto.setVisibility(View.VISIBLE);
+        txtPreco.setVisibility(View.VISIBLE);
+        txtPrecoCDesc.setVisibility(View.VISIBLE);
+        view2.setVisibility(View.VISIBLE);
+        titleDescricao.setVisibility(View.VISIBLE);
+        txtDescricao.setVisibility(View.VISIBLE);
+        btnAdd.setVisibility(View.VISIBLE);
     }
 }
