@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -39,6 +40,7 @@ public class Itens extends Fragment {
     }
 
     private ViewGroup mainLayout;
+    private ProgressBar loader;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,6 +51,9 @@ public class Itens extends Fragment {
         final int id = getArguments().getInt("id");
 
         mainLayout = view.findViewById(R.id.itensLayout);
+        loader = view.findViewById(R.id.loader);
+
+        loader.setVisibility(View.VISIBLE);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://oficinacordova.azurewebsites.net/")
@@ -66,6 +71,7 @@ public class Itens extends Fragment {
                 for (Produto p : listaProduto) {
                     addLines(p.getNomeProduto(), p.getPrecProduto(), p.getIdProduto());
                 }
+                loader.setVisibility(View.GONE);
             }
 
             @Override
@@ -83,6 +89,7 @@ public class Itens extends Fragment {
         TextView nomeProduto = linerLayout.findViewById(R.id.txtProduto);
         TextView precoProduto = linerLayout.findViewById(R.id.txtPreco);
         ImageView image = linerLayout.findViewById(R.id.imgProduto);
+
 
         String url = "https://oficinacordova.azurewebsites.net/android/rest/produto/image/" + id;
         ImageLoader imageLoader = ImageLoader.getInstance();

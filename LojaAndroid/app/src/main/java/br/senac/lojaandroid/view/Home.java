@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.List;
@@ -35,6 +36,7 @@ public class Home extends Fragment {
     }
 
     private ViewGroup mainLayout;
+    private ProgressBar loader;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,6 +45,9 @@ public class Home extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         mainLayout = view.findViewById(R.id.itensLayout);
+        loader = view.findViewById(R.id.loader);
+
+        loader.setVisibility(View.VISIBLE);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://oficinacordova.azurewebsites.net/")
@@ -60,6 +65,7 @@ public class Home extends Fragment {
                 for (Categoria c : listaCategoria) {
                     addCard(c.getNomeCategoria(), c.getIdCategoria());
                 }
+                loader.setVisibility(View.GONE);
             }
 
             @Override

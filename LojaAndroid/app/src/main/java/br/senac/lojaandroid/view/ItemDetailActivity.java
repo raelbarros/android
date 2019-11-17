@@ -1,8 +1,6 @@
 package br.senac.lojaandroid.view;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,8 +9,10 @@ import android.text.SpannableString;
 import android.text.style.BackgroundColorSpan;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -34,6 +34,7 @@ public class ItemDetailActivity extends AppCompatActivity {
     TextView txtProduto, txtPreco, txtDescricao, txtPrecoCDesc;
     Button btnAdd;
     ImageView imgProduto;
+    ProgressBar loader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,9 @@ public class ItemDetailActivity extends AppCompatActivity {
         txtPrecoCDesc = findViewById(R.id.txtPrecoCDesc);
         btnAdd = findViewById(R.id.btnAdd);
         imgProduto = findViewById(R.id.imgDetailProd);
+        loader = findViewById(R.id.loader);
+
+        loader.setVisibility(View.VISIBLE);
 
         Intent intent = getIntent();
         int id = intent.getIntExtra("id", 0);
@@ -63,43 +67,49 @@ public class ItemDetailActivity extends AppCompatActivity {
             public void onResponse(Call<Produto> call, Response<Produto> response) {
                 Produto p = response.body();
 
-                if (p.getDescontoPromocao() == 0) {
-                    DecimalFormat format = new DecimalFormat("RS: 0.00");
+                try {
+                    if (p.getDescontoPromocao() == 0) {
+                        DecimalFormat format = new DecimalFormat("RS: 0.00");
 
-                    txtPrecoCDesc.setVisibility(View.INVISIBLE);
+                        txtPrecoCDesc.setVisibility(View.INVISIBLE);
 
-                    txtPreco.setText(format.format(p.getPrecProduto()));
+                        txtPreco.setText(format.format(p.getPrecProduto()));
 
-                    txtProduto.setText(p.getNomeProduto());
-                    txtDescricao.setText(p.getDescProduto());
+                        txtProduto.setText(p.getNomeProduto());
+                        txtDescricao.setText(p.getDescProduto());
 
-                    String url = "https://oficinacordova.azurewebsites.net/android/rest/produto/image/" + p.getIdProduto();
-                    ImageLoader imageLoader = ImageLoader.getInstance();
-                    imageLoader.init(ImageLoaderConfiguration.createDefault(ItemDetailActivity.this));
-                    imageLoader.displayImage(url, imgProduto);
+                        String url = "https://oficinacordova.azurewebsites.net/android/rest/produto/image/" + p.getIdProduto();
+                        ImageLoader imageLoader = ImageLoader.getInstance();
+                        imageLoader.init(ImageLoaderConfiguration.createDefault(ItemDetailActivity.this));
+                        imageLoader.displayImage(url, imgProduto);
 
-                } else {
-                    DecimalFormat format = new DecimalFormat("RS: 0.00");
+                    } else {
+                        DecimalFormat format = new DecimalFormat("RS: 0.00");
 
-                    Double precoTotal = p.getPrecProduto() - p.getDescontoPromocao();
+                        Double precoTotal = p.getPrecProduto() - p.getDescontoPromocao();
 
-                    SpannableString preco = new SpannableString("DE - " + format.format(p.getPrecProduto()));
-                    preco.setSpan(new BackgroundColorSpan(Color.YELLOW), 0, preco.length(), 0);
+                        SpannableString preco = new SpannableString("DE - " + format.format(p.getPrecProduto()));
+                        preco.setSpan(new BackgroundColorSpan(Color.YELLOW), 0, preco.length(), 0);
 
-                    txtPreco.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f);
-                    txtPreco.setTextColor(Color.RED);
-                    txtPreco.setText(preco);
-                    txtPrecoCDesc.setText("POR - " + format.format(precoTotal));
+                        txtPreco.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f);
+                        txtPreco.setTextColor(Color.RED);
+                        txtPreco.setText(preco);
+                        txtPrecoCDesc.setText("POR - " + format.format(precoTotal));
 
-                    txtProduto.setText(p.getNomeProduto());
-                    txtDescricao.setText(p.getDescProduto());
+                        txtProduto.setText(p.getNomeProduto());
+                        txtDescricao.setText(p.getDescProduto());
 
-                    String url = "https://oficinacordova.azurewebsites.net/android/rest/produto/image/" + p.getIdProduto();
-                    ImageLoader imageLoader = ImageLoader.getInstance();
-                    imageLoader.init(ImageLoaderConfiguration.createDefault(ItemDetailActivity.this));
-                    imageLoader.displayImage(url, imgProduto);
+                        String url = "https://oficinacordova.azurewebsites.net/android/rest/produto/image/" + p.getIdProduto();
+                        ImageLoader imageLoader = ImageLoader.getInstance();
+                        imageLoader.init(ImageLoaderConfiguration.createDefault(ItemDetailActivity.this));
+                        imageLoader.displayImage(url, imgProduto);
+                    }
+
+                    loader.setVisibility(View.GONE);
+                } catch (Throwable t) {
 
                 }
+
             }
 
             @Override

@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frag_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".view.Home"
-    android:screenOrientation="portrait">
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".view.Home">
+
+    <ProgressBar
+        android:id="@+id/loader"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
 
     <ScrollView
         android:id="@+id/itensScroll"
@@ -20,6 +28,9 @@
             android:layout_height="wrap_content"
             android:foregroundGravity="center"
             android:gravity="center"
-            app:columnCount="2" />
+            app:columnCount="1">
+
+        </androidx.gridlayout.widget.GridLayout>
     </ScrollView>
-</LinearLayout>
+
+</RelativeLayout>
