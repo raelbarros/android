@@ -80,7 +80,7 @@ public class Home extends Fragment {
 
 
     private void addCard(String nome, final int id) {
-        final CardView cardview = (CardView) LayoutInflater.from(getActivity()).inflate(R.layout.cardcategory_layout, mainLayout, false);
+        final CardView cardview = (CardView) LayoutInflater.from(getActivity()).inflate(R.layout.card_category_layout, mainLayout, false);
         TextView nomeCategoria = cardview.findViewById(R.id.nomeCategoria);
 
         nomeCategoria.setText(nome);

@@ -67,7 +67,7 @@
                     android:padding="5dp"
                     android:paddingBottom="10dp"
                     android:textAllCaps="false"
-                    android:textColor="#4ABAFF"
+                    android:textColor="#0072CB"
                     android:textSize="20sp"
                     android:visibility="invisible" />
 
@@ -80,7 +80,7 @@
                     android:paddingBottom="10dp"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:textColor="#4ABAFF"
+                    android:textColor="#0072CB"
                     android:textSize="20sp"
                     android:visibility="invisible" />
 
@@ -122,11 +122,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/btnrounded"
-                android:backgroundTint="#00a0ff"
+                android:backgroundTint="#00C851"
                 android:padding="10dp"
                 android:text="Adicionar ao Carrinho"
                 android:textAllCaps="false"
-                android:textColor="#FC000000"
+                android:textColor="#FCFFFFFF"
                 android:visibility="invisible" />
 
         </LinearLayout>

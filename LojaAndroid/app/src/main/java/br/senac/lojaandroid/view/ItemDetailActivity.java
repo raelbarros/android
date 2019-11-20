@@ -76,21 +76,8 @@ public class ItemDetailActivity extends AppCompatActivity {
 
                 try {
                     if (p.getDescontoPromocao() == 0) {
-                        DecimalFormat format = new DecimalFormat("RS: 0.00");
-
                         txtPrecoCDesc.setVisibility(View.INVISIBLE);
-
-                        txtPreco.setText(format.format(p.getPrecProduto()));
-
-                        txtProduto.setText(p.getNomeProduto());
-                        txtDescricao.setText(p.getDescProduto());
-
-                        String url = "https://oficinacordova.azurewebsites.net/android/rest/produto/image/" + p.getIdProduto();
-                        ImageLoader imageLoader = ImageLoader.getInstance();
-                        imageLoader.init(ImageLoaderConfiguration.createDefault(ItemDetailActivity.this));
-                        imageLoader.displayImage(url, imgProduto);
-
-                        addCarrinho(p);
+                        txtPreco.setText(Util.formatPreco(p.getPrecProduto()));
 
                     } else {
                         Double precoTotal = p.getPrecProduto() - p.getDescontoPromocao();
@@ -102,17 +89,18 @@ public class ItemDetailActivity extends AppCompatActivity {
                         txtPreco.setTextColor(Color.RED);
                         txtPreco.setText(preco);
                         txtPrecoCDesc.setText("Por " + Util.formatPreco(precoTotal));
-
-                        txtProduto.setText(p.getNomeProduto());
-                        txtDescricao.setText(p.getDescProduto());
-
-                        String url = "https://oficinacordova.azurewebsites.net/android/rest/produto/image/" + p.getIdProduto();
-                        ImageLoader imageLoader = ImageLoader.getInstance();
-                        imageLoader.init(ImageLoaderConfiguration.createDefault(ItemDetailActivity.this));
-                        imageLoader.displayImage(url, imgProduto);
-
-                        addCarrinho(p);
                     }
+
+                    txtProduto.setText(p.getNomeProduto());
+                    txtDescricao.setText(p.getDescProduto());
+
+                    String url = "https://oficinacordova.azurewebsites.net/android/rest/produto/image/" + p.getIdProduto();
+                    ImageLoader imageLoader = ImageLoader.getInstance();
+                    imageLoader.init(ImageLoaderConfiguration.createDefault(ItemDetailActivity.this));
+                    imageLoader.displayImage(url, imgProduto);
+
+                    addCarrinho(p);
+
 
                     loader.setVisibility(View.GONE);
                     setItensVisible();
@@ -131,19 +119,19 @@ public class ItemDetailActivity extends AppCompatActivity {
 
     }
 
-    private void addCarrinho(final Produto p){
+    private void addCarrinho(final Produto p) {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Singleton s = Singleton.getInstance();
                 s.addCarrinho(p);
-                Util.showMsg(ItemDetailActivity.this, "Show!", "Produto adicionado no Carrinho!");
+                Util.showMsg(ItemDetailActivity.this, "Show!", "Produto adicionado no Carrinho!", "Continuar Comprando");
 
             }
         });
     }
 
-    private void setItensVisible(){
+    private void setItensVisible() {
         imgProduto.setVisibility(View.VISIBLE);
         view1.setVisibility(View.VISIBLE);
         txtProduto.setVisibility(View.VISIBLE);

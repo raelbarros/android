@@ -22,6 +22,10 @@ public class Singleton {
         return carrinho;
     }
 
+    public void setCarrinho(List<Produto> carrinho) {
+        this.carrinho = carrinho;
+    }
+
     public void addCarrinho(Produto p) {
         if (carrinho == null ){
             carrinho = new ArrayList<Produto>();
@@ -29,11 +33,8 @@ public class Singleton {
         this.carrinho.add(p);
     }
 
-    public List<Produto> getItensSearch() {
-        return itensSearch;
+    public void removeAll() {
+        this.carrinho.clear();
     }
 
-    public void setItensSearch(List<Produto> itensSearch) {
-        this.itensSearch = itensSearch;
-    }
 }

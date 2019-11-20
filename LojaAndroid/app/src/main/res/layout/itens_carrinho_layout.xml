@@ -25,14 +25,23 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnDelete"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|top"
+                android:background="@android:color/transparent"
+                android:drawableRight="@drawable/delete24px"
+                android:paddingRight="5dp" />
 
             <TextView
                 android:id="@+id/txtProduto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"
+                android:paddingTop="10dp"
                 android:textColor="#5C5C5C"
                 android:textSize="20sp" />
 
@@ -44,6 +53,7 @@
                 android:textAlignment="textStart"
                 android:textColor="#0072CB"
                 android:textSize="18sp" />
+
         </LinearLayout>
 
     </LinearLayout>

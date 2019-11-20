@@ -27,18 +27,11 @@ public class Util {
     }
 
     // Cria uma Dialog
-    public static void showMsg(final AppCompatActivity app, String title, String msg){
+    public static void showMsg(final AppCompatActivity app, String title, String msg, String btn){
         final AlertDialog.Builder builder = new AlertDialog.Builder(app);
         builder.setTitle(title);
         builder.setMessage(msg);
-        builder.setPositiveButton("Ir para o Carrinho", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(app, CarrinhoActivity.class);
-                app.startActivity(intent);
-            }
-        });
-        builder.setNegativeButton("Continuar Comprando", null);
+        builder.setPositiveButton(btn, null);
         builder.show();
     }
 }
