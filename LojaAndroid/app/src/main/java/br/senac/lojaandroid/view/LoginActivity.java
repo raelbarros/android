@@ -11,7 +11,7 @@ import android.widget.EditText;
 import br.senac.lojaandroid.R;
 import br.senac.lojaandroid.api.ApiCliente;
 import br.senac.lojaandroid.model.Cliente;
-import br.senac.lojaandroid.model.LojaDatabase;
+import br.senac.lojaandroid.util.LojaDatabase;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

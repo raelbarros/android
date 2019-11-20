@@ -9,7 +9,6 @@ import android.text.SpannableString;
 import android.text.style.BackgroundColorSpan;
 import android.util.TypedValue;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -23,6 +22,7 @@ import java.text.DecimalFormat;
 import br.senac.lojaandroid.R;
 import br.senac.lojaandroid.api.ApiProduto;
 import br.senac.lojaandroid.model.Produto;
+import br.senac.lojaandroid.util.Util;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -89,17 +89,15 @@ public class ItemDetailActivity extends AppCompatActivity {
                         imageLoader.displayImage(url, imgProduto);
 
                     } else {
-                        DecimalFormat format = new DecimalFormat("RS: 0.00");
-
                         Double precoTotal = p.getPrecProduto() - p.getDescontoPromocao();
 
-                        SpannableString preco = new SpannableString(format.format(p.getPrecProduto()));
+                        SpannableString preco = new SpannableString(Util.formatPreco(p.getPrecProduto()));
                         preco.setSpan(new BackgroundColorSpan(Color.YELLOW), 0, preco.length(), 0);
 
                         txtPreco.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15f);
                         txtPreco.setTextColor(Color.RED);
                         txtPreco.setText(preco);
-                        txtPrecoCDesc.setText("Por " + format.format(precoTotal));
+                        txtPrecoCDesc.setText("Por " + Util.formatPreco(precoTotal));
 
                         txtProduto.setText(p.getNomeProduto());
                         txtDescricao.setText(p.getDescProduto());
@@ -108,7 +106,6 @@ public class ItemDetailActivity extends AppCompatActivity {
                         ImageLoader imageLoader = ImageLoader.getInstance();
                         imageLoader.init(ImageLoaderConfiguration.createDefault(ItemDetailActivity.this));
                         imageLoader.displayImage(url, imgProduto);
-
 
                     }
 

@@ -1,4 +1,4 @@
-package br.senac.lojaandroid.model;
+package br.senac.lojaandroid.util;
 
 import android.content.Context;
 
@@ -9,6 +9,9 @@ import androidx.room.RoomDatabase;
 import br.senac.lojaandroid.dao.ClienteDao;
 import br.senac.lojaandroid.dao.ItensPedidoDao;
 import br.senac.lojaandroid.dao.PedidoDao;
+import br.senac.lojaandroid.model.Cliente;
+import br.senac.lojaandroid.model.ItensPedido;
+import br.senac.lojaandroid.model.Pedido;
 
 @Database(entities = {Pedido.class, ItensPedido.class, Cliente.class}, exportSchema = false, version = 1)
 public abstract class LojaDatabase extends RoomDatabase {

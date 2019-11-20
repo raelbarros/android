@@ -17,12 +17,12 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 import br.senac.lojaandroid.R;
 import br.senac.lojaandroid.api.ApiProduto;
 import br.senac.lojaandroid.model.Produto;
+import br.senac.lojaandroid.util.Util;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -95,11 +95,9 @@ public class Itens extends Fragment {
         ImageLoader imageLoader = ImageLoader.getInstance();
         imageLoader.init(ImageLoaderConfiguration.createDefault(getActivity()));
 
-        DecimalFormat format = new DecimalFormat("RS: 0.00");
-
         imageLoader.displayImage(url, image);
         nomeProduto.setText(name);
-        precoProduto.setText(format.format(preco));
+        precoProduto.setText(Util.formatPreco(preco));
 
         linerLayout.setOnClickListener(new View.OnClickListener() {
             @Override
