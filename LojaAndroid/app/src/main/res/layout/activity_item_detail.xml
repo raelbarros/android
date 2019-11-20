@@ -125,9 +125,8 @@
                 android:backgroundTint="#00a0ff"
                 android:padding="10dp"
                 android:text="Adicionar ao Carrinho"
-                android:textAllCaps="true"
+                android:textAllCaps="false"
                 android:textColor="#FC000000"
-                android:textStyle="bold"
                 android:visibility="invisible" />
 
         </LinearLayout>

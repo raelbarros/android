@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -22,6 +23,7 @@ import java.text.DecimalFormat;
 import br.senac.lojaandroid.R;
 import br.senac.lojaandroid.api.ApiProduto;
 import br.senac.lojaandroid.model.Produto;
+import br.senac.lojaandroid.util.Singleton;
 import br.senac.lojaandroid.util.Util;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -88,6 +90,8 @@ public class ItemDetailActivity extends AppCompatActivity {
                         imageLoader.init(ImageLoaderConfiguration.createDefault(ItemDetailActivity.this));
                         imageLoader.displayImage(url, imgProduto);
 
+                        addCarrinho(p);
+
                     } else {
                         Double precoTotal = p.getPrecProduto() - p.getDescontoPromocao();
 
@@ -107,6 +111,7 @@ public class ItemDetailActivity extends AppCompatActivity {
                         imageLoader.init(ImageLoaderConfiguration.createDefault(ItemDetailActivity.this));
                         imageLoader.displayImage(url, imgProduto);
 
+                        addCarrinho(p);
                     }
 
                     loader.setVisibility(View.GONE);
@@ -126,7 +131,19 @@ public class ItemDetailActivity extends AppCompatActivity {
 
     }
 
-    public void setItensVisible(){
+    private void addCarrinho(final Produto p){
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Singleton s = Singleton.getInstance();
+                s.addCarrinho(p);
+                Util.showMsg(ItemDetailActivity.this, "Show!", "Produto adicionado no Carrinho!");
+
+            }
+        });
+    }
+
+    private void setItensVisible(){
         imgProduto.setVisibility(View.VISIBLE);
         view1.setVisibility(View.VISIBLE);
         txtProduto.setVisibility(View.VISIBLE);
