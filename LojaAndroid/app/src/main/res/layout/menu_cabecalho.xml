@@ -9,7 +9,7 @@
     android:screenOrientation="portrait">
 
     <TextView
-        android:id="@+id/txtLogar"
+        android:id="@+id/txtEntrar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"

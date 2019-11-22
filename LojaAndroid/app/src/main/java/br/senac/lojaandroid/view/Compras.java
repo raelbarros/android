@@ -25,8 +25,17 @@ public class Compras extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_compras, container, false);
+        View view = inflater.inflate(R.layout.fragment_compras, container, false);
+
+
+        if(getActivity() instanceof MainActivity){
+            MainActivity mainActivity = (MainActivity)getActivity();
+            mainActivity.setTitle("Suas Compras");
+        }
+
+        return view;
+
+
     }
 
 }

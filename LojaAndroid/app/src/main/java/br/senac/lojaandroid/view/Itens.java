@@ -2,6 +2,7 @@ package br.senac.lojaandroid.view;
 
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
@@ -90,12 +92,18 @@ public class Itens extends Fragment {
         TextView precoProduto = linerLayout.findViewById(R.id.txtPreco);
         ImageView image = linerLayout.findViewById(R.id.imgProduto);
 
-
         String url = "https://oficinacordova.azurewebsites.net/android/rest/produto/image/" + id;
         ImageLoader imageLoader = ImageLoader.getInstance();
         imageLoader.init(ImageLoaderConfiguration.createDefault(getActivity()));
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.drawable.animation)
+                .showImageForEmptyUri(R.drawable.error24px)
+                .showImageOnFail(R.drawable.error24px)
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .build();
 
-        imageLoader.displayImage(url, image);
+        imageLoader.displayImage(url, image, options);
         nomeProduto.setText(name);
         precoProduto.setText(Util.formatPreco(preco));
 

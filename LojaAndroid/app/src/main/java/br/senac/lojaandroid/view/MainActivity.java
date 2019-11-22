@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private FloatingActionButton carrinho;
+    private TextView btnEntrar;
 
     Home home;
 
@@ -35,10 +37,11 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-
         drawerLayout = findViewById(R.id.drawer);
         navigationView = findViewById(R.id.navegation_view);
         carrinho = findViewById(R.id.carrinho);
+        btnEntrar = navigationView.getHeaderView(0).findViewById(R.id.txtEntrar);
+
 
         home = new Home();
         getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, home).commit();
@@ -47,6 +50,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CarrinhoActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnEntrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });
@@ -98,4 +109,8 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
+
+    public void setTitle(String title){
+        getSupportActionBar().setTitle(title);
+    }
 }

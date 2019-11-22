@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
@@ -97,7 +98,16 @@ public class ItemDetailActivity extends AppCompatActivity {
                     String url = "https://oficinacordova.azurewebsites.net/android/rest/produto/image/" + p.getIdProduto();
                     ImageLoader imageLoader = ImageLoader.getInstance();
                     imageLoader.init(ImageLoaderConfiguration.createDefault(ItemDetailActivity.this));
-                    imageLoader.displayImage(url, imgProduto);
+
+                    DisplayImageOptions options = new DisplayImageOptions.Builder()
+                            .showImageOnLoading(R.drawable.animation)
+                            .showImageForEmptyUri(R.drawable.error24px)
+                            .showImageOnFail(R.drawable.error24px)
+                            .cacheInMemory(true)
+                            .cacheOnDisk(true)
+                            .build();
+
+                    imageLoader.displayImage(url, imgProduto, options);
 
                     addCarrinho(p);
 

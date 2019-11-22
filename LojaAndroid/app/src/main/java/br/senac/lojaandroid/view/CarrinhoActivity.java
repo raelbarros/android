@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
@@ -94,6 +95,13 @@ public class CarrinhoActivity extends AppCompatActivity {
         String url = "https://oficinacordova.azurewebsites.net/android/rest/produto/image/" + id;
         ImageLoader imageLoader = ImageLoader.getInstance();
         imageLoader.init(ImageLoaderConfiguration.createDefault(this));
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.drawable.animation)
+                .showImageForEmptyUri(R.drawable.error24px)
+                .showImageOnFail(R.drawable.error24px)
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .build();
 
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,13 +112,14 @@ public class CarrinhoActivity extends AppCompatActivity {
                     if(id == p.getIdProduto()) {
                         listAux.remove(p);
                     }
+                    break;
                 }
                 singleton.setCarrinho(listAux);
                 attLayout(listAux);
             }
         });
 
-        imageLoader.displayImage(url, image);
+        imageLoader.displayImage(url, image, options);
         nomeProduto.setText(name);
         precoProduto.setText(Util.formatPreco(preco));
 
