@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center|top"
+    android:orientation="vertical"
+    tools:context=".view.CadastroActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|top"
+            android:orientation="vertical">
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/imageView"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_margin="5dp"
+                android:src="@drawable/animation"
+                app:civ_border_color="#000"
+                app:civ_border_width="4dp"
+                app:civ_shadow="false"
+                app:civ_shadow_color="@color/colorPrimaryDark"
+                app:civ_shadow_radius="10" />
+
+            <EditText
+                android:id="@+id/txtNome"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/inputrounded"
+                android:ems="10"
+                android:hint="Nome"
+                android:inputType="textPersonName"
+                android:padding="10dp" />
+
+            <EditText
+                android:id="@+id/txtSobreN"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/inputrounded"
+                android:ems="10"
+                android:hint="Sobrenome"
+                android:inputType="textPersonName"
+                android:padding="10dp" />
+
+            <EditText
+                android:id="@+id/txtPhone"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/inputrounded"
+                android:ems="10"
+                android:hint="Celular"
+                android:inputType="phone"
+                android:padding="10dp" />
+
+            <EditText
+                android:id="@+id/txtCPF"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/inputrounded"
+                android:ems="10"
+                android:hint="CPF"
+                android:inputType="number"
+                android:padding="10dp" />
+
+            <EditText
+                android:id="@+id/txtEmail"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/inputrounded"
+                android:ems="10"
+                android:fontFamily="@font/roboto"
+                android:hint="E-mail"
+                android:inputType="textPersonName"
+                android:padding="10dp" />
+
+            <EditText
+                android:id="@+id/txtPasswd"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/inputrounded"
+                android:ems="10"
+                android:hint="Senha"
+                android:inputType="textPassword"
+                android:padding="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnCancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#CC0000"
+                    android:fontFamily="@font/roboto"
+                    android:padding="10dp"
+                    android:text="Cancelar"
+                    android:textColor="#FFFFFF" />
+
+                <Button
+                    android:id="@+id/btnSalvar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#00C851"
+                    android:fontFamily="@font/roboto"
+                    android:padding="10dp"
+                    android:text="Salvar"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+    <com.theartofdev.edmodo.cropper.CropImageView
+        xmlns:custom="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cropImageView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+
+</LinearLayout>
