@@ -1,14 +1,12 @@
 package br.senac.lojaandroid.view;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -17,6 +15,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import br.senac.lojaandroid.R;
+import br.senac.lojaandroid.util.Util;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,6 +27,17 @@ public class MainActivity extends AppCompatActivity {
 
     Home home;
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (Util.checkLogin(MainActivity.this)) {
+            Util.showToast(getApplication(), Util.checkLogin(MainActivity.this)+"");
+            btnEntrar.setVisibility(View.INVISIBLE);
+        } else {
+            btnEntrar.setVisibility(View.VISIBLE);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         home = new Home();
         getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, home).commit();
+
 
         carrinho.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +90,11 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 } else if (menuItem.getItemId() == R.id.action_home) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, home).commit();
+                } else if (menuItem.getItemId() == R.id.action_logout) {
+                    SharedPreferences.Editor editor = Util.getPreference(getApplication()).edit();
+                    editor.putBoolean("logado", false);
+                    editor.apply();
+                    Util.showToast(getApplication(), "saiu");
                 }
 
                 return false;
@@ -108,7 +124,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
-
 
     public void setTitle(String title){
         getSupportActionBar().setTitle(title);

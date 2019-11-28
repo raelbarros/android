@@ -25,10 +25,11 @@ import br.senac.lojaandroid.util.Util;
 
 public class CarrinhoActivity extends AppCompatActivity {
 
-    TextView txtLimpar, txtTotal;
+    private TextView txtLimpar, txtTotal;
+    private Button btnFinalizar;
     private ViewGroup mainLayout;
     private ProgressBar loader;
-    List<Produto> listaProdutos;
+    private List<Produto> listaProdutos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +48,6 @@ public class CarrinhoActivity extends AppCompatActivity {
 
         try {
             attLayout(listaProdutos);
-        } catch (Throwable t){
-
         } finally {
             loader.setVisibility(View.GONE);
         }

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,7 @@ import br.senac.lojaandroid.R;
 import br.senac.lojaandroid.api.ApiCliente;
 import br.senac.lojaandroid.model.Cliente;
 import br.senac.lojaandroid.util.LojaDatabase;
+import br.senac.lojaandroid.util.Util;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -22,9 +24,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText txtEmail, txtPasswd;
-    TextView txtCadastro;
-    Button btnLogin;
+    private EditText txtEmail, txtPasswd;
+    private TextView txtCadastro;
+    private Button btnLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,16 +56,34 @@ public class LoginActivity extends AppCompatActivity {
                 callCliente.enqueue(new Callback<Cliente>() {
                     @Override
                     public void onResponse(Call<Cliente> call, Response<Cliente> response) {
-                        Cliente clientResp = response.body();
+                        try {
+                            if (response.code() == 200) {
+                                Cliente clientResp = response.body();
+
+                                // Salva o status de logado na preferencia compartilhada
+                                SharedPreferences.Editor editor = Util.getPreference(LoginActivity.this).edit();
+                                editor.putBoolean("logado", true);
+                                editor.apply();
+
+                                // Salva o Cliente no SQLLite
+                                LojaDatabase appDB = LojaDatabase.getInstance(LoginActivity.this);
+                                appDB.clienteDao().insertCliente(cliente);
+
+                                // Retorna para a pagina Inicial
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                        }catch (Throwable t) {
+
+                        }
 
                         //Pega a Instancia do DB
-                        LojaDatabase appDB = LojaDatabase.getInstance(LoginActivity.this);
+                        //LojaDatabase appDB = LojaDatabase.getInstance(LoginActivity.this);
                         //Salva no SQLite
-                        appDB.clienteDao().insertCliente(clientResp);
+                        //appDB.clienteDao().insertCliente(clientResp);
                         //Pega do SQLite
-                        Cliente clienteDB = appDB.clienteDao().clienteById(clientResp.getIdCliente());
-
-                        showDialog(clienteDB.getNomeCompletoCliente(), "Logou");
+                        //Cliente clienteDB = appDB.clienteDao().clienteById(clientResp.getIdCliente());
+                        //showDialog(clienteDB.getNomeCompletoCliente(), "Logou");
                     }
 
                     @Override
@@ -85,13 +105,4 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void showDialog(String msg, String title) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-        builder.setMessage("Nome do usuario eh: " + msg);
-        builder.setTitle(title);
-        builder.setCancelable(false);
-        builder.setPositiveButton("Ok", null);
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
 }

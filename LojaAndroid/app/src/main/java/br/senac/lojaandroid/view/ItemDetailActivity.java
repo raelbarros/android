@@ -34,11 +34,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ItemDetailActivity extends AppCompatActivity {
 
-    TextView txtProduto, txtPreco, txtDescricao, txtPrecoCDesc, titleDescricao;
-    Button btnAdd;
-    ImageView imgProduto;
-    ProgressBar loader;
-    View view1, view2;
+    private TextView txtProduto, txtPreco, txtDescricao, txtPrecoCDesc, titleDescricao;
+    private Button btnAdd;
+    private ImageView imgProduto;
+    private ProgressBar loader;
+    private View view1, view2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
