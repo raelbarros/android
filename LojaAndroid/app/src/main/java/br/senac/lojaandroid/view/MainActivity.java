@@ -32,10 +32,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 
         if (Util.checkLogin(MainActivity.this)) {
-            Util.showToast(getApplication(), Util.checkLogin(MainActivity.this)+"");
-            btnEntrar.setVisibility(View.INVISIBLE);
-        } else {
-            btnEntrar.setVisibility(View.VISIBLE);
+            btnEntrar.setVisibility(View.GONE);
         }
     }
 
@@ -92,8 +89,12 @@ public class MainActivity extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, home).commit();
                 } else if (menuItem.getItemId() == R.id.action_logout) {
                     SharedPreferences.Editor editor = Util.getPreference(getApplication()).edit();
+
                     editor.putBoolean("logado", false);
                     editor.apply();
+
+                    btnEntrar.setVisibility(View.VISIBLE);
+
                     Util.showToast(getApplication(), "saiu");
                 }
 

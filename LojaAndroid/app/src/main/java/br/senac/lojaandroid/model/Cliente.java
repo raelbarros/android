@@ -1,5 +1,9 @@
 package br.senac.lojaandroid.model;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
+
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -12,9 +16,18 @@ public class Cliente {
     private String nomeCompletoCliente;
     private String CPFCliente;
     private String celularCliente;
+    private String image;
 
     public Cliente () {
 
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public int getIdCliente() {

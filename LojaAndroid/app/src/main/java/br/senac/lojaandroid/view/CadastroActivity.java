@@ -8,14 +8,28 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.View;
+import android.view.WindowInsets;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.ByteBuffer;
 
 import br.senac.lojaandroid.R;
 import br.senac.lojaandroid.api.ApiCliente;
@@ -33,6 +47,8 @@ public class CadastroActivity extends AppCompatActivity {
 
     private Button btnSalvar, btnCancelar;
     private EditText txtNome, txtSobrenome, txtPhone, txtCPF, txtEmail, txtPasswd;
+    private ImageView imageUser;
+    private String auxImage;
 
 
     @Override
@@ -48,6 +64,7 @@ public class CadastroActivity extends AppCompatActivity {
         txtPasswd = findViewById(R.id.txtPasswd);
         btnSalvar = findViewById(R.id.btnSalvar);
         btnCancelar = findViewById(R.id.btnCancel);
+        imageUser = findViewById(R.id.imageUser);
 
         txtCPF.addTextChangedListener(MaskUtil.mask(txtCPF, MaskUtil.FORMAT_CPF));
         txtPhone.addTextChangedListener(MaskUtil.mask(txtPhone, MaskUtil.FORMAT_FONE));
@@ -78,6 +95,8 @@ public class CadastroActivity extends AppCompatActivity {
                             if (response.code() == 200) {
                                 Cliente clienteResp = response.body();
 
+                                cliente.setImage(auxImage);
+
                                 // Salva o status de logado na preferencia compartilhada
                                 SharedPreferences.Editor editor = Util.getPreference(CadastroActivity.this).edit();
                                 editor.putBoolean("logado", true);
@@ -104,6 +123,15 @@ public class CadastroActivity extends AppCompatActivity {
             }
         });
 
+        imageUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CropImage.activity()
+                        .setGuidelines(CropImageView.Guidelines.ON)
+                        .start(CadastroActivity.this);
+            }
+        });
+
 
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,5 +142,40 @@ public class CadastroActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+                Uri resultUri = result.getUri();
+
+                String nameImage = System.currentTimeMillis()+".jpg";
+
+                File to = new File(Environment.getExternalStorageDirectory()+"/Android/data/br.senac.lojaandroid/files", nameImage);
+                try {
+                    to.createNewFile();
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), resultUri);
+
+                    FileOutputStream fOut = new FileOutputStream(to);
+
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
+                    fOut.flush();
+                    fOut.close();
+
+                    auxImage = nameImage;
+
+                    imageUser.setImageBitmap(bitmap);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Exception error = result.getError();
+            }
+        }
+
+    }
 
 }
