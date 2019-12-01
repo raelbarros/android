@@ -9,58 +9,60 @@
     android:orientation="vertical"
     android:screenOrientation="portrait">
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-
-        <ImageView
-            android:id="@+id/imgProduto"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:padding="10dp"
-            tools:srcCompat="@drawable/ic_launcher_background" />
+        android:layout_margin="5dp"
+        android:elevation="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btnDelete"
-                android:layout_width="25dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right|top"
-                android:background="@android:color/transparent"
-                android:drawableRight="@drawable/delete24px"
-                android:paddingRight="5dp" />
 
-            <TextView
-                android:id="@+id/txtProduto"
+            <ImageView
+                android:id="@+id/imgProduto"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:padding="10dp"
+                tools:srcCompat="@drawable/ic_launcher_background" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
-                android:paddingTop="10dp"
-                android:textColor="#5C5C5C"
-                android:textSize="20sp" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/txtPreco"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
-                android:textAlignment="textStart"
-                android:textColor="#0072CB"
-                android:textSize="18sp" />
+                <Button
+                    android:id="@+id/btnDelete"
+                    android:layout_width="25dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|top"
+                    android:background="@android:color/transparent"
+                    android:drawableRight="@drawable/delete24px"
+                    android:paddingRight="5dp" />
+
+                <TextView
+                    android:id="@+id/txtProduto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:paddingTop="10dp"
+                    android:textColor="#5C5C5C"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/txtPreco"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:textAlignment="textStart"
+                    android:textColor="#0072CB"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray" />
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>

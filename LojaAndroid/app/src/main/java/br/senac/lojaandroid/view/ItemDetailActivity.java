@@ -1,6 +1,7 @@
 package br.senac.lojaandroid.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -34,11 +35,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ItemDetailActivity extends AppCompatActivity {
 
-    private TextView txtProduto, txtPreco, txtDescricao, txtPrecoCDesc, titleDescricao;
+    private TextView txtProduto, txtPreco, txtDescricao, titleDescricao;
     private Button btnAdd;
     private ImageView imgProduto;
     private ProgressBar loader;
-    private View view1, view2;
+    private CardView card1, card2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +50,10 @@ public class ItemDetailActivity extends AppCompatActivity {
         txtProduto = findViewById(R.id.txtProduto);
         txtPreco = findViewById(R.id.txtPreco);
         txtDescricao = findViewById(R.id.txtDescricao);
-        txtPrecoCDesc = findViewById(R.id.txtPrecoCDesc);
         btnAdd = findViewById(R.id.btnAdd);
         imgProduto = findViewById(R.id.imgDetailProd);
-        view1 = findViewById(R.id.view1);
-        view2 = findViewById(R.id.view2);
+        card1 = findViewById(R.id.card1);
+        card2 = findViewById(R.id.card2);
         titleDescricao = findViewById(R.id.titleDescricao);
 
         loader = findViewById(R.id.loader);
@@ -80,22 +80,7 @@ public class ItemDetailActivity extends AppCompatActivity {
                 getSupportActionBar().setTitle(p.getNomeProduto());
 
                 try {
-                    if (p.getDescontoPromocao() == 0) {
-                        txtPrecoCDesc.setVisibility(View.INVISIBLE);
-                        txtPreco.setText(Util.formatPreco(p.getPrecProduto()));
-
-                    } else {
-                        Double precoTotal = p.getPrecProduto() - p.getDescontoPromocao();
-
-                        SpannableString preco = new SpannableString(Util.formatPreco(p.getPrecProduto()));
-                        preco.setSpan(new BackgroundColorSpan(Color.YELLOW), 0, preco.length(), 0);
-
-                        txtPreco.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15f);
-                        txtPreco.setTextColor(Color.RED);
-                        txtPreco.setText(preco);
-                        txtPrecoCDesc.setText("Por " + Util.formatPreco(precoTotal));
-                    }
-
+                    txtPreco.setText(Util.formatPreco(p.getPrecProduto()));
                     txtProduto.setText(p.getNomeProduto());
                     txtDescricao.setText(p.getDescProduto());
 
@@ -147,11 +132,10 @@ public class ItemDetailActivity extends AppCompatActivity {
 
     private void setItensVisible() {
         imgProduto.setVisibility(View.VISIBLE);
-        view1.setVisibility(View.VISIBLE);
+        card1.setVisibility(View.VISIBLE);
         txtProduto.setVisibility(View.VISIBLE);
         txtPreco.setVisibility(View.VISIBLE);
-        txtPrecoCDesc.setVisibility(View.VISIBLE);
-        view2.setVisibility(View.VISIBLE);
+        card2.setVisibility(View.VISIBLE);
         titleDescricao.setVisibility(View.VISIBLE);
         txtDescricao.setVisibility(View.VISIBLE);
         btnAdd.setVisibility(View.VISIBLE);

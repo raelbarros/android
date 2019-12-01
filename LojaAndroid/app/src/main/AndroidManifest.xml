@@ -20,11 +20,13 @@
 
         <activity android:name=".view.FinalizarActivity"
             android:label="@string/title_activity_finalizar"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"
+            android:parentActivityName=".view.CarrinhoActivity"></activity>
         <activity
             android:name=".view.CadastroActivity"
             android:label="@string/title_activity_cadastro"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"
+            android:parentActivityName=".view.MainActivity"></activity>
         <activity
             android:name=".view.CarrinhoActivity"
             android:label="@string/title_activity_carrinho"

@@ -16,6 +16,14 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
 
+    <TextView
+        android:id="@+id/txtVazio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Carrinho Vazio"
+        android:visibility="invisible" />
+
     <ScrollView
         android:id="@+id/itensScroll"
         android:layout_width="match_parent"
