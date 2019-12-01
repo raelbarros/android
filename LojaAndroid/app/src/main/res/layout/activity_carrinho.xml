@@ -86,27 +86,31 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
+            <Button
+                android:id="@+id/btnComprar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/btnrounded"
+                android:backgroundTint="#00C851"
+                android:fontFamily="@font/roboto"
+                android:padding="10dp"
+                android:text="Finalizar Compra"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+
             <TextView
                 android:id="@+id/txtLimpar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:padding="10dp"
                 android:text="Limpar Carrinho"
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimary"
                 android:textSize="12sp" />
-
-            <Button
-                android:id="@+id/btnComprar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/btnrounded"
-                android:backgroundTint="#00C851"
-                android:fontFamily="@font/roboto"
-                android:text="Finalizar Compra"
-                android:textAllCaps="false"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp" />
 
         </LinearLayout>
     </ScrollView>
