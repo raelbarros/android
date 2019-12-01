@@ -2,6 +2,7 @@ package br.senac.lojaandroid.view;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,7 +18,11 @@ import com.amitshekhar.DebugDB;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
+import java.io.File;
+
 import br.senac.lojaandroid.R;
+import br.senac.lojaandroid.model.Cliente;
+import br.senac.lojaandroid.util.LojaDatabase;
 import br.senac.lojaandroid.util.Util;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,6 +45,27 @@ public class MainActivity extends AppCompatActivity {
         //Verifica se o Usuario esta logado para mostrar informacoes
         if (Util.checkLogin(MainActivity.this)) {
             setItensCabecalho("entrou");
+
+            try {
+                LojaDatabase appDB = LojaDatabase.getInstance(MainActivity.this);
+                int id = Util.getCurrentUser(MainActivity.this);
+
+                Cliente clienteDB = appDB.clienteDao().clienteById(id);
+
+                //Salva imagem no imageView
+                if (clienteDB.getImage() == null) {
+                    hImageUser.setImageResource(R.drawable.user_512);
+                } else {
+                    hImageUser.setImageURI(Uri.fromFile(new File("/storage/emulated/0/" + clienteDB.getImage())));
+                }
+
+                hTxtNome.setText(clienteDB.getNomeCompletoCliente());
+                hTxtEmail.setText(clienteDB.getEmailCliente());
+            } catch (Throwable t) {
+                hImageUser.setVisibility(View.VISIBLE);
+                hImageUser.setImageResource(R.drawable.user_512);
+            }
+
         }
     }
 
@@ -61,9 +87,6 @@ public class MainActivity extends AppCompatActivity {
         hTxtEmail = navigationView.getHeaderView(0).findViewById(R.id.txtEmail);
         hImageUser = navigationView.getHeaderView(0).findViewById(R.id.imageUser);
 
-
-        //IP Dbug DB
-        System.out.println(DebugDB.getAddressLog());
 
         home = new Home();
         getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, home).commit();
@@ -109,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = Util.getPreference(getApplication()).edit();
 
                     // Registra que usuario saiu na preferencia compartilhada
-                    editor.putBoolean("logado", false);
+                    editor.putBoolean("isLogado", false);
                     editor.apply();
 
                     setItensCabecalho("saiu");

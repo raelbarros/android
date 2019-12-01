@@ -105,7 +105,9 @@ public class CadastroActivity extends AppCompatActivity {
 
                                 // Salva o status de logado na preferencia compartilhada
                                 SharedPreferences.Editor editor = Util.getPreference(CadastroActivity.this).edit();
-                                editor.putBoolean("logado", true);
+                                editor.putBoolean("isLogado", true);
+                                editor.putInt("currentUser", clienteResp.getIdCliente());
+
                                 editor.apply();
 
                                 // Salva o Cliente no SQLLite

@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.amitshekhar.DebugDB;
+
 import java.util.List;
 
 import br.senac.lojaandroid.R;
@@ -54,6 +56,8 @@ public class Home extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        //IP Dbug DB
+        System.out.println(DebugDB.getAddressLog());
 
 
         mainLayout = view.findViewById(R.id.itensLayout);

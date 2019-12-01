@@ -32,7 +32,7 @@
                     android:id="@+id/imageUser"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
-                    android:src="@drawable/animation"
+                    android:src="@drawable/user_512"
                     app:civ_border_color="#969696"
                     app:civ_border_width="4dp"
                     app:civ_shadow="false"

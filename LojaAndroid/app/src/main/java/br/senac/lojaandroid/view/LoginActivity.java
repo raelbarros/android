@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.List;
+
 import br.senac.lojaandroid.R;
 import br.senac.lojaandroid.api.ApiCliente;
 import br.senac.lojaandroid.model.Cliente;
@@ -67,12 +69,24 @@ public class LoginActivity extends AppCompatActivity {
 
                                 // Salva o status de logado na preferencia compartilhada
                                 SharedPreferences.Editor editor = Util.getPreference(LoginActivity.this).edit();
-                                editor.putBoolean("logado", true);
+                                editor.putBoolean("isLogado", true);
+                                editor.putInt("currentUser", clientResp.getIdCliente());
                                 editor.apply();
 
-                                // Salva o Cliente no SQLLite
                                 LojaDatabase appDB = LojaDatabase.getInstance(LoginActivity.this);
-                                appDB.clienteDao().insertCliente(cliente);
+
+                                List<Cliente> listaCliente = appDB.clienteDao().getAllCliente();
+
+                                //Verifica se ja existe o cliente no SQLITE
+                                for (Cliente c : listaCliente) {
+                                    if (c.getIdCliente() == clientResp.getIdCliente()) {
+                                        appDB.clienteDao().updateCliente(clientResp);
+                                    } else {
+                                        // Salva o Cliente no SQLLite
+                                        appDB.clienteDao().insertCliente(clientResp);
+                                    }
+                                }
+
 
                                 loader.setVisibility(View.GONE);
                                 // Retorna para a pagina Inicial
@@ -83,13 +97,6 @@ public class LoginActivity extends AppCompatActivity {
 
                         }
 
-                        //Pega a Instancia do DB
-                        //LojaDatabase appDB = LojaDatabase.getInstance(LoginActivity.this);
-                        //Salva no SQLite
-                        //appDB.clienteDao().insertCliente(clientResp);
-                        //Pega do SQLite
-                        //Cliente clienteDB = appDB.clienteDao().clienteById(clientResp.getIdCliente());
-                        //showDialog(clienteDB.getNomeCompletoCliente(), "Logou");
                     }
 
                     @Override

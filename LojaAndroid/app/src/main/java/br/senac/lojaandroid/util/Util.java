@@ -3,10 +3,10 @@ package br.senac.lojaandroid.util;
 import android.app.AlertDialog;
 import android.app.Application;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
+
 import android.content.SharedPreferences;
-import android.graphics.Color;
+import android.net.Uri;
+import android.os.Environment;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +16,14 @@ import java.text.DecimalFormat;
 import br.senac.lojaandroid.view.CarrinhoActivity;
 
 public class Util {
+
+    // URI image user
+    public static Uri getImageURIUser(String img){
+        Uri teste =  Uri.parse("/storage/emulated/0/" + img);
+        System.out.println(teste);
+        return teste;
+    }
+
 
     // Formata o valor do Preco
     public static String formatPreco(Double x){
@@ -39,12 +47,23 @@ public class Util {
 
     // Pega o arquivo da preferencia compartilhada default
     public static SharedPreferences getPreference(Context context){
-        SharedPreferences pref = context.getSharedPreferences("settings_default", context.MODE_PRIVATE);
+        SharedPreferences pref = context.getSharedPreferences("settingsDefault", context.MODE_PRIVATE);
         return pref;
     }
 
     public static boolean checkLogin(Context context){
-        boolean logou = getPreference(context).getBoolean("logado", false);
-        return logou;
+        return getPreference(context).getBoolean("isLogado", false);
+    }
+
+    public static int getCurrentUser(Context context){
+        return getPreference(context).getInt("currentUser", 0);
     }
 }
+
+//Pega a Instancia do DB
+//LojaDatabase appDB = LojaDatabase.getInstance(LoginActivity.this);
+//Salva no SQLite
+//appDB.clienteDao().insertCliente(clientResp);
+//Pega do SQLite
+//Cliente clienteDB = appDB.clienteDao().clienteById(clientResp.getIdCliente());
+//showDialog(clienteDB.getNomeCompletoCliente(), "Logou");
