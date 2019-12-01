@@ -19,6 +19,7 @@ import java.util.List;
 import br.senac.lojaandroid.R;
 import br.senac.lojaandroid.api.ApiCategoria;
 import br.senac.lojaandroid.model.Categoria;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -39,10 +40,21 @@ public class Home extends Fragment {
     private ProgressBar loader;
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if(getActivity() instanceof MainActivity){
+            MainActivity mainActivity = (MainActivity)getActivity();
+            mainActivity.setTitle(R.string.app_name);
+        }
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+
 
         mainLayout = view.findViewById(R.id.itensLayout);
         loader = view.findViewById(R.id.loader);
@@ -60,12 +72,19 @@ public class Home extends Fragment {
         call.enqueue(new Callback<List<Categoria>>() {
             @Override
             public void onResponse(Call<List<Categoria>> call, Response<List<Categoria>> response) {
-                List<Categoria> listaCategoria = response.body();
+                try {
+                    if (response.code() == 200) {
+                        List<Categoria> listaCategoria = response.body();
 
-                for (Categoria c : listaCategoria) {
-                    addCard(c.getNomeCategoria(), c.getIdCategoria());
+                        for (Categoria c : listaCategoria) {
+                            addCard(c.getNomeCategoria(), c.getIdCategoria());
+                        }
+                        loader.setVisibility(View.GONE);
+                    }
+                } catch (Throwable t) {
+
                 }
-                loader.setVisibility(View.GONE);
+
             }
 
             @Override
@@ -79,19 +98,20 @@ public class Home extends Fragment {
     }
 
 
-    private void addCard(String nome, final int id) {
+    private void addCard(final String nome, final int id) {
         final CardView cardview = (CardView) LayoutInflater.from(getActivity()).inflate(R.layout.card_category_layout, mainLayout, false);
-        TextView nomeCategoria = cardview.findViewById(R.id.nomeCategoria);
+        final TextView nomeCategoria = cardview.findViewById(R.id.nomeCategoria);
 
         nomeCategoria.setText(nome);
 
         cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Itens itens = new Itens();
+                ItensCategoria itens = new ItensCategoria();
                 Bundle bundle = new Bundle();
 
                 bundle.putInt("id", id);
+                bundle.putString("title", nome);
 
                 itens.setArguments(bundle);
 

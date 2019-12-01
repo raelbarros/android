@@ -14,10 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.FinalizarActivity"></activity>
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
+
+        <activity android:name=".view.FinalizarActivity"
+            android:label="@string/title_activity_finalizar"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".view.CadastroActivity"
             android:label="@string/title_activity_cadastro"

@@ -45,6 +45,7 @@ public class ItemDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_detail);
 
+
         txtProduto = findViewById(R.id.txtProduto);
         txtPreco = findViewById(R.id.txtPreco);
         txtDescricao = findViewById(R.id.txtDescricao);
@@ -74,6 +75,9 @@ public class ItemDetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Produto> call, Response<Produto> response) {
                 Produto p = response.body();
+
+                //Altera o Titulo da pagina
+                getSupportActionBar().setTitle(p.getNomeProduto());
 
                 try {
                     if (p.getDescontoPromocao() == 0) {

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import br.senac.lojaandroid.R;
@@ -27,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText txtEmail, txtPasswd;
     private TextView txtCadastro;
     private Button btnLogin;
+    private ProgressBar loader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +39,13 @@ public class LoginActivity extends AppCompatActivity {
         txtCadastro = findViewById(R.id.txtCadastrar);
         txtPasswd = findViewById(R.id.txtPasswd);
         btnLogin = findViewById(R.id.btnLogin);
+        loader = findViewById(R.id.loader);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                loader.setVisibility(View.VISIBLE);
+
                 final Cliente cliente = new Cliente();
                 cliente.setEmailCliente(txtEmail.getText().toString());
                 cliente.setSenhaCliente(txtPasswd.getText().toString());
@@ -69,6 +74,7 @@ public class LoginActivity extends AppCompatActivity {
                                 LojaDatabase appDB = LojaDatabase.getInstance(LoginActivity.this);
                                 appDB.clienteDao().insertCliente(cliente);
 
+                                loader.setVisibility(View.GONE);
                                 // Retorna para a pagina Inicial
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);

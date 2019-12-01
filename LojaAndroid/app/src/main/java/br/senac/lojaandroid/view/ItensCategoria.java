@@ -2,7 +2,6 @@ package br.senac.lojaandroid.view;
 
 
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -34,10 +33,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Itens extends Fragment {
+public class ItensCategoria extends Fragment {
 
 
-    public Itens() {
+    public ItensCategoria() {
         // Required empty public constructor
     }
 
@@ -48,12 +47,19 @@ public class Itens extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_itens, container, false);
-
-        final int id = getArguments().getInt("id");
+        View view = inflater.inflate(R.layout.fragment_itens_categoria, container, false);
 
         mainLayout = view.findViewById(R.id.itensLayout);
         loader = view.findViewById(R.id.loader);
+
+        final int id = getArguments().getInt("id");
+
+        //Altera o tituto
+        String title = getArguments().getString("title");
+        if(getActivity() instanceof MainActivity){
+            MainActivity mainActivity = (MainActivity)getActivity();
+            mainActivity.setTitle(title);
+        }
 
         loader.setVisibility(View.VISIBLE);
 

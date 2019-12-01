@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -18,6 +19,7 @@ import android.view.WindowInsets;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
@@ -45,11 +47,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CadastroActivity extends AppCompatActivity {
 
-    private Button btnSalvar, btnCancelar;
+    private Button btnSalvar, btnCancelar, btnEscolherImg;
     private EditText txtNome, txtSobrenome, txtPhone, txtCPF, txtEmail, txtPasswd;
     private ImageView imageUser;
     private String auxImage;
-
+    private ProgressBar loader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +66,9 @@ public class CadastroActivity extends AppCompatActivity {
         txtPasswd = findViewById(R.id.txtPasswd);
         btnSalvar = findViewById(R.id.btnSalvar);
         btnCancelar = findViewById(R.id.btnCancel);
+        btnEscolherImg = findViewById(R.id.btnEscolherImg);
         imageUser = findViewById(R.id.imageUser);
+        loader = findViewById(R.id.loader);
 
         txtCPF.addTextChangedListener(MaskUtil.mask(txtCPF, MaskUtil.FORMAT_CPF));
         txtPhone.addTextChangedListener(MaskUtil.mask(txtPhone, MaskUtil.FORMAT_FONE));
@@ -72,6 +76,8 @@ public class CadastroActivity extends AppCompatActivity {
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                loader.setVisibility(View.VISIBLE);
+
                 final Cliente cliente = new Cliente();
                 cliente.setNomeCompletoCliente(txtNome.getText().toString() + " " + txtSobrenome.getText().toString());
                 cliente.setCelularCliente(txtPhone.getText().toString());
@@ -91,10 +97,10 @@ public class CadastroActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Cliente> call, Response<Cliente> response) {
                         try {
-                            Util.showToast(getApplication(), response.body() + "");
                             if (response.code() == 200) {
                                 Cliente clienteResp = response.body();
 
+                                cliente.setIdCliente(clienteResp.getIdCliente());
                                 cliente.setImage(auxImage);
 
                                 // Salva o status de logado na preferencia compartilhada
@@ -105,6 +111,8 @@ public class CadastroActivity extends AppCompatActivity {
                                 // Salva o Cliente no SQLLite
                                 LojaDatabase appDB = LojaDatabase.getInstance(CadastroActivity.this);
                                 appDB.clienteDao().insertCliente(cliente);
+
+                                loader.setVisibility(View.GONE);
 
                                 // Retorna para a pagina Inicial
                                 Intent intent = new Intent(CadastroActivity.this, MainActivity.class);
@@ -123,11 +131,13 @@ public class CadastroActivity extends AppCompatActivity {
             }
         });
 
-        imageUser.setOnClickListener(new View.OnClickListener() {
+        btnEscolherImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CropImage.activity()
                         .setGuidelines(CropImageView.Guidelines.ON)
+                        .setAspectRatio(2,2)
+                        .setCropShape(CropImageView.CropShape.OVAL)
                         .start(CadastroActivity.this);
             }
         });
@@ -145,6 +155,7 @@ public class CadastroActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
@@ -152,7 +163,8 @@ public class CadastroActivity extends AppCompatActivity {
 
                 String nameImage = System.currentTimeMillis()+".jpg";
 
-                File to = new File(Environment.getExternalStorageDirectory()+"/Android/data/br.senac.lojaandroid/files", nameImage);
+                File to = new File(Environment.getExternalStorageDirectory(), nameImage);
+
                 try {
                     to.createNewFile();
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), resultUri);

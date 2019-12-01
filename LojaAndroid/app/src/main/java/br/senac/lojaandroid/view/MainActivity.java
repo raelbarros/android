@@ -5,12 +5,15 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.amitshekhar.DebugDB;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
@@ -23,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private FloatingActionButton carrinho;
-    private TextView btnEntrar;
+    private TextView hBtnEntrar, hTxtNome, hTxtEmail;
+    private ImageView hImageUser;
 
     Home home;
 
@@ -31,8 +35,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
+        setTitle(R.string.app_name);
+
+        //Verifica se o Usuario esta logado para mostrar informacoes
         if (Util.checkLogin(MainActivity.this)) {
-            btnEntrar.setVisibility(View.GONE);
+            setItensCabecalho("entrou");
         }
     }
 
@@ -47,8 +54,16 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer);
         navigationView = findViewById(R.id.navegation_view);
         carrinho = findViewById(R.id.carrinho);
-        btnEntrar = navigationView.getHeaderView(0).findViewById(R.id.txtEntrar);
 
+        // ItensCategoria Menu Cabecalho
+        hBtnEntrar = navigationView.getHeaderView(0).findViewById(R.id.txtEntrar);
+        hTxtNome = navigationView.getHeaderView(0).findViewById(R.id.txtNome);
+        hTxtEmail = navigationView.getHeaderView(0).findViewById(R.id.txtEmail);
+        hImageUser = navigationView.getHeaderView(0).findViewById(R.id.imageUser);
+
+
+        //IP Dbug DB
+        System.out.println(DebugDB.getAddressLog());
 
         home = new Home();
         getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, home).commit();
@@ -62,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnEntrar.setOnClickListener(new View.OnClickListener() {
+        hBtnEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
@@ -72,13 +87,15 @@ public class MainActivity extends AppCompatActivity {
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
-                if (menuItem.isChecked()){
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                // marca tela atual no menu
+                if (menuItem.isChecked()) {
                     menuItem.setChecked(false);
                 } else {
                     menuItem.setChecked(true);
                 }
 
+                // fecha menu ao clicar
                 drawerLayout.closeDrawers();
 
                 if (menuItem.getItemId() == R.id.action_compras) {
@@ -87,16 +104,19 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 } else if (menuItem.getItemId() == R.id.action_home) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, home).commit();
+                    return true;
                 } else if (menuItem.getItemId() == R.id.action_logout) {
                     SharedPreferences.Editor editor = Util.getPreference(getApplication()).edit();
 
+                    // Registra que usuario saiu na preferencia compartilhada
                     editor.putBoolean("logado", false);
                     editor.apply();
 
-                    btnEntrar.setVisibility(View.VISIBLE);
+                    setItensCabecalho("saiu");
 
                     Util.showToast(getApplication(), "saiu");
                 }
+
 
                 return false;
             }
@@ -110,23 +130,42 @@ public class MainActivity extends AppCompatActivity {
 
     // Verifica qual menu foi selecionado
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        } else if (item.getItemId() == R.id.action_home) {
+            Intent intent = new Intent(MainActivity.this, MainActivity.class);
+            startActivity(intent);
             return true;
         } else if (item.getItemId() == R.id.action_compras) {
             Intent intent = new Intent(MainActivity.this, Compras.class);
             startActivity(intent);
             return true;
 
-        } else if (item.getItemId() == R.id.action_home) {
-            Intent intent = new Intent(MainActivity.this, MainActivity.class);
-            startActivity(intent);
-            return true;
         }
         return false;
     }
 
-    public void setTitle(String title){
+    public void setItensCabecalho(String status) {
+        if (status.equals("saiu")) {
+            hBtnEntrar.setVisibility(View.VISIBLE);
+
+            hImageUser.setVisibility(View.GONE);
+            hTxtNome.setVisibility(View.GONE);
+            hTxtEmail.setVisibility(View.GONE);
+        } else if (status.equals("entrou")) {
+            hBtnEntrar.setVisibility(View.GONE);
+
+            hImageUser.setVisibility(View.VISIBLE);
+            hTxtNome.setVisibility(View.VISIBLE);
+            hTxtEmail.setVisibility(View.VISIBLE);
+        }
+
+    }
+
+    public void setTitle(String title) {
         getSupportActionBar().setTitle(title);
     }
+
+
 }

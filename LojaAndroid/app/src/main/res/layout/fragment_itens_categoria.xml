@@ -7,7 +7,7 @@
     android:background="#FFFFFF"
     android:clickable="true"
     android:orientation="vertical"
-    tools:context=".view.Itens">
+    tools:context=".view.ItensCategoria">
 
     <ProgressBar
         android:id="@+id/loader"
