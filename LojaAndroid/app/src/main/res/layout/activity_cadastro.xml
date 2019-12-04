@@ -102,7 +102,7 @@
                 android:padding="10dp" />
 
             <EditText
-                android:id="@+id/txtCPF"
+                android:id="@+id/txtEmail"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"

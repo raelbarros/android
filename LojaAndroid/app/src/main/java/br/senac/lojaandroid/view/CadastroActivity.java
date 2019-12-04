@@ -50,7 +50,7 @@ public class CadastroActivity extends AppCompatActivity {
         txtSobrenome = findViewById(R.id.txtSobreN);
         txtPhone = findViewById(R.id.txtPhone);
         txtCPF = findViewById(R.id.txtCPF);
-        txtEmail = findViewById(R.id.txtCPF);
+        txtEmail = findViewById(R.id.txtEmail);
         txtPasswd = findViewById(R.id.txtPasswd);
         btnSalvar = findViewById(R.id.btnSalvar);
         btnCancelar = findViewById(R.id.btnCancel);
