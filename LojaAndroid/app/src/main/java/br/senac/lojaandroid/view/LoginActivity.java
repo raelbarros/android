@@ -1,6 +1,5 @@
 package br.senac.lojaandroid.view;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -37,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        txtEmail = findViewById(R.id.txtEmail);
+        txtEmail = findViewById(R.id.txtCPF);
         txtCadastro = findViewById(R.id.txtCadastrar);
         txtPasswd = findViewById(R.id.txtPasswd);
         btnLogin = findViewById(R.id.btnLogin);

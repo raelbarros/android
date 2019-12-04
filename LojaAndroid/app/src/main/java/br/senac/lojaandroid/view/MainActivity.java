@@ -14,7 +14,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.amitshekhar.DebugDB;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
@@ -84,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         // ItensCategoria Menu Cabecalho
         hBtnEntrar = navigationView.getHeaderView(0).findViewById(R.id.txtEntrar);
         hTxtNome = navigationView.getHeaderView(0).findViewById(R.id.txtNome);
-        hTxtEmail = navigationView.getHeaderView(0).findViewById(R.id.txtEmail);
+        hTxtEmail = navigationView.getHeaderView(0).findViewById(R.id.txtCPF);
         hImageUser = navigationView.getHeaderView(0).findViewById(R.id.imageUser);
 
 

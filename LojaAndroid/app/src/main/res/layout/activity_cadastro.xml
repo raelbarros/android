@@ -102,7 +102,7 @@
                 android:padding="10dp" />
 
             <EditText
-                android:id="@+id/txtEmail"
+                android:id="@+id/txtCPF"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
@@ -141,7 +141,7 @@
                     android:fontFamily="@font/roboto"
                     android:padding="10dp"
                     android:text="Cancelar"
-                    android:textAllCaps="false"
+                    android:textAllCaps="true"
                     android:textColor="#FFFFFF"
                     android:textSize="14sp" />
 
@@ -156,7 +156,7 @@
                     android:fontFamily="@font/roboto"
                     android:padding="10dp"
                     android:text="Salvar"
-                    android:textAllCaps="false"
+                    android:textAllCaps="true"
                     android:textColor="#FFFFFF"
                     android:textSize="14sp" />
             </LinearLayout>

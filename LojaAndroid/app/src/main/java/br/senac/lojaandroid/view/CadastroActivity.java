@@ -2,20 +2,14 @@ package br.senac.lojaandroid.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
-import android.view.WindowInsets;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -25,13 +19,7 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.ByteBuffer;
 
 import br.senac.lojaandroid.R;
 import br.senac.lojaandroid.api.ApiCliente;
@@ -62,7 +50,7 @@ public class CadastroActivity extends AppCompatActivity {
         txtSobrenome = findViewById(R.id.txtSobreN);
         txtPhone = findViewById(R.id.txtPhone);
         txtCPF = findViewById(R.id.txtCPF);
-        txtEmail = findViewById(R.id.txtEmail);
+        txtEmail = findViewById(R.id.txtCPF);
         txtPasswd = findViewById(R.id.txtPasswd);
         btnSalvar = findViewById(R.id.btnSalvar);
         btnCancelar = findViewById(R.id.btnCancel);
