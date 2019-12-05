@@ -127,7 +127,11 @@ public class MainActivity extends AppCompatActivity {
                 } else if (menuItem.getItemId() == R.id.action_home) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, home).commit();
                     return true;
-                } else if (menuItem.getItemId() == R.id.action_logout) {
+                } else if (menuItem.getItemId() == R.id.action_sobre) {
+                    Sobre sobre = new Sobre();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, sobre).commit();
+                    return true;
+                }else if (menuItem.getItemId() == R.id.action_logout) {
                     SharedPreferences.Editor editor = Util.getPreference(getApplication()).edit();
 
                     // Registra que usuario saiu na preferencia compartilhada
@@ -164,7 +168,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, Compras.class);
             startActivity(intent);
             return true;
-
         }
         return false;
     }

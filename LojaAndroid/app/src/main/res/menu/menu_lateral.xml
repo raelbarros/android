@@ -18,6 +18,7 @@
             android:title="Sobre">
             <menu>
                 <item
+                    android:id="@+id/action_sobre"
                     android:checkable="true"
                     android:icon="@drawable/icons8_sobre"
                     android:title="Sobre" />

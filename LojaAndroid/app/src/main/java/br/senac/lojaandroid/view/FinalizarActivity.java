@@ -1,6 +1,8 @@
 package br.senac.lojaandroid.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -12,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.util.List;
@@ -25,12 +28,13 @@ import br.senac.lojaandroid.util.LojaDatabase;
 import br.senac.lojaandroid.util.MaskUtil;
 import br.senac.lojaandroid.util.Singleton;
 import br.senac.lojaandroid.util.Util;
+import br.senac.lojaandroid.validador.ValidadorPedido;
 
 public class FinalizarActivity extends AppCompatActivity {
 
     private ImageView imageUser;
     private TextView txtNome, txtCPF, txtTotal;
-    private EditText txtEndereco, txtCEP, txtBairro, txtCartao, txtCod, txtVal;
+    private EditText txtEndereco, txtCEP, txtBairro, txtCartao, txtCod, txtVal, txtCidade;
     private Button btnCancelar, btnConfirmar;
 
     @Override
@@ -44,6 +48,7 @@ public class FinalizarActivity extends AppCompatActivity {
         txtEndereco = findViewById(R.id.txtEndereco);
         txtCEP = findViewById(R.id.txtCEP);
         txtBairro = findViewById(R.id.txtBairro);
+        txtCidade = findViewById(R.id.txtCidade);
         txtCartao = findViewById(R.id.txtCartao);
         txtCod = findViewById(R.id.txtCod);
         txtVal = findViewById(R.id.txtValidade);
@@ -84,6 +89,7 @@ public class FinalizarActivity extends AppCompatActivity {
         btnConfirmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Pedido p = new Pedido();
 
                 int idCliente = Util.getCurrentUser(FinalizarActivity.this);
@@ -92,34 +98,47 @@ public class FinalizarActivity extends AppCompatActivity {
                 p.setEndereco(txtEndereco.getText().toString());
                 p.setCep(txtCEP.getText().toString());
                 p.setBairro(txtBairro.getText().toString());
+                p.setCidade(txtCidade.getText().toString());
                 p.setNunCartao(txtCartao.getText().toString());
-                p.setCardCodigo(Integer.parseInt(txtCod.getText().toString()));
+                p.setCardCodigo(txtCod.getText().toString());
                 p.setCardVal(txtVal.getText().toString());
                 p.setDate(Util.getDateNow());
+                p.setTotal(txtTotal.getText().toString());
 
-                //Pega id do item inserido
-                LojaDatabase appDB = LojaDatabase.getInstance(FinalizarActivity.this);
-                long id = appDB.pedidoDao().insertPedido(p);
+                try {
 
-                //salva itens da compra
-                for (Produto prod : listaProduto) {
-                    ItensPedido ip = new ItensPedido();
-                    ip.setIdPedido(id);
-                    ip.setIdProduto(prod.getIdProduto());
+                    //Valida o obj p
+                    ValidadorPedido.validate(p);
 
-                    appDB.itensPedido().insertItem(ip);
-                }
+                    //Pega id do item inserido
+                    LojaDatabase appDB = LojaDatabase.getInstance(FinalizarActivity.this);
+                    long id = appDB.pedidoDao().insertPedido(p);
 
-                final AlertDialog.Builder builder = new AlertDialog.Builder(FinalizarActivity.this);
-                builder.setTitle("Show!");
-                builder.setMessage("Sua Compra foi realizada com sucesso");
-                builder.setPositiveButton("Verificar Historico", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    //salva itens da compra
+                    for (Produto prod : listaProduto) {
+                        ItensPedido ip = new ItensPedido();
+                        ip.setIdPedido(id);
+                        ip.setIdProduto(prod.getIdProduto());
 
+                        appDB.itensPedido().insertItem(ip);
                     }
-                });
-                builder.show();
+
+                    //Mostra alerta de sucesso
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(FinalizarActivity.this);
+                    builder.setTitle("Show!");
+                    builder.setMessage("Sua Compra foi realizada com sucesso");
+                    builder.setPositiveButton("Continuar Comprando", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(FinalizarActivity.this, MainActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                    builder.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(FinalizarActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

@@ -13,12 +13,14 @@ public class Pedido {
     private long nunPedido;
     private int idCliente;
     private String nunCartao;
-    private int cardCodigo;
+    private String cardCodigo;
     private String cardVal;
     private String cep;
     private String endereco;
     private String bairro;
+    private String cidade;
     private String date;
+    private String total;
 
 
     //@Embedded
@@ -52,11 +54,11 @@ public class Pedido {
         this.nunCartao = nunCartao;
     }
 
-    public int getCardCodigo() {
+    public String getCardCodigo() {
         return cardCodigo;
     }
 
-    public void setCardCodigo(int cardCodigo) {
+    public void setCardCodigo(String cardCodigo) {
         this.cardCodigo = cardCodigo;
     }
 
@@ -100,7 +102,21 @@ public class Pedido {
         this.date = date;
     }
 
+    public String getCidade() {
+        return cidade;
+    }
 
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getTotal() {
+        return total;
+    }
+
+    public void setTotal(String total) {
+        this.total = total;
+    }
 //    public List<ItensPedido> getListaItensPedido() {
 //        return listaItensPedido;
 //    }

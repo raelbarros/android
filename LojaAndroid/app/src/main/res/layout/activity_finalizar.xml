@@ -147,13 +147,6 @@
                             android:inputType="textPersonName"
                             android:padding="10dp" />
 
-                        <Spinner
-                            android:id="@+id/spEstados"
-                            android:layout_width="100dp"
-                            android:layout_height="40dp"
-                            android:layout_margin="5dp"
-                            android:padding="10dp"
-                            android:spinnerMode="dropdown" />
                     </LinearLayout>
 
                 </LinearLayout>

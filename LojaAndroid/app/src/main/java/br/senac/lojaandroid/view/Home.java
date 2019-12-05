@@ -104,7 +104,7 @@ public class Home extends Fragment {
 
     private void addCard(final String nome, final int id) {
         final CardView cardview = (CardView) LayoutInflater.from(getActivity()).inflate(R.layout.card_category_layout, mainLayout, false);
-        final TextView nomeCategoria = cardview.findViewById(R.id.nomeCategoria);
+        final TextView nomeCategoria = cardview.findViewById(R.id.txtData);
 
         nomeCategoria.setText(nome);
 
@@ -114,11 +114,13 @@ public class Home extends Fragment {
                 ItensCategoria itens = new ItensCategoria();
                 Bundle bundle = new Bundle();
 
+                //Set id para ser usado na tela de itens
                 bundle.putInt("id", id);
                 bundle.putString("title", nome);
 
                 itens.setArguments(bundle);
 
+                //Chama o fragmento do itens
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.frag_container, itens);
