@@ -132,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
 
                     // Registra que usuario saiu na preferencia compartilhada
                     editor.putBoolean("isLogado", false);
+                    editor.putInt("currentUser", 0);
                     editor.apply();
 
                     setItensCabecalho("saiu");

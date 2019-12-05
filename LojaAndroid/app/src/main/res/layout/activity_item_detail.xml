@@ -91,10 +91,10 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto"
                         android:padding="10dp"
-                        android:text="Descricao"
+                        android:text="Descrição"
                         android:textAlignment="textStart"
                         android:textColor="#000000"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
                         android:textStyle="bold"
                         android:visibility="invisible" />
 
@@ -120,10 +120,12 @@
                 android:background="@drawable/btnrounded"
                 android:backgroundTint="#00C851"
                 android:elevation="10dp"
+                android:fontFamily="@font/roboto"
                 android:padding="10dp"
                 android:text="Adicionar ao Carrinho"
                 android:textAllCaps="true"
                 android:textColor="#FCFFFFFF"
+                android:textSize="14sp"
                 android:visibility="invisible" />
 
         </LinearLayout>

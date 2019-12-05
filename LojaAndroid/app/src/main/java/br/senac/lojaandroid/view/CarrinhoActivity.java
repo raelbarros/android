@@ -1,7 +1,10 @@
 package br.senac.lojaandroid.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -78,8 +81,30 @@ public class CarrinhoActivity extends AppCompatActivity {
         btnComprar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CarrinhoActivity.this, FinalizarActivity.class);
-                startActivity(intent);
+                if (Util.checkLogin(CarrinhoActivity.this)) {
+                    Intent intent = new Intent(CarrinhoActivity.this, FinalizarActivity.class);
+                    startActivity(intent);
+                } else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(CarrinhoActivity.this);
+                    builder.setTitle("Finalizar Compra");
+                    builder.setMessage("Cadastre-se para concluir sua compra!");
+                    builder.setPositiveButton("Cadastre-se!", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(CarrinhoActivity.this, CadastroActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                    builder.setNegativeButton("Efetuar Login!", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(CarrinhoActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                    builder.show();
+                }
+
             }
         });
 

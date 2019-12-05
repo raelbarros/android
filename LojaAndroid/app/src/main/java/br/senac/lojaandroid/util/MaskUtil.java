@@ -10,7 +10,9 @@ public abstract class MaskUtil {
     public static final String FORMAT_CEP = "#####-###";
     public static final String FORMAT_DATE = "##/##/####";
     public static final String FORMAT_HOUR = "##:##";
-    public static final String FORMAT_CARD = "[####] [####] [####] [####]";
+    public static final String FORMAT_CARD = "#### #### #### ####";
+    public static final String FORMAT_VAL = "##/##";
+    public static final String FORMAT_CODSEG = "###";
 
     public static TextWatcher mask(final EditText ediTxt, final String mask) {
         return new TextWatcher() {

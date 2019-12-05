@@ -4,13 +4,13 @@ package br.senac.lojaandroid.view;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -42,6 +42,7 @@ public class ItensCategoria extends Fragment {
 
     private ViewGroup mainLayout;
     private ProgressBar loader;
+    private TextView txtVazio;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,12 +53,14 @@ public class ItensCategoria extends Fragment {
         mainLayout = view.findViewById(R.id.itensLayout);
         loader = view.findViewById(R.id.loader);
 
+        txtVazio = view.findViewById(R.id.txtVazio);
+
         final int id = getArguments().getInt("id");
 
         //Altera o tituto
         String title = getArguments().getString("title");
-        if(getActivity() instanceof MainActivity){
-            MainActivity mainActivity = (MainActivity)getActivity();
+        if (getActivity() instanceof MainActivity) {
+            MainActivity mainActivity = (MainActivity) getActivity();
             mainActivity.setTitle(title);
         }
 
@@ -76,8 +79,13 @@ public class ItensCategoria extends Fragment {
             public void onResponse(Call<List<Produto>> call, Response<List<Produto>> response) {
                 List<Produto> listaProduto = response.body();
 
-                for (Produto p : listaProduto) {
-                    addLines(p.getNomeProduto(), p.getPrecProduto(), p.getIdProduto());
+                if (listaProduto.isEmpty() || listaProduto == null) {
+                    txtVazio.setVisibility(View.VISIBLE);
+                } else {
+                    txtVazio.setVisibility(View.GONE);
+                    for (Produto p : listaProduto) {
+                        addCards(p.getNomeProduto(), p.getPrecProduto(), p.getIdProduto());
+                    }
                 }
                 loader.setVisibility(View.GONE);
             }
@@ -91,20 +99,20 @@ public class ItensCategoria extends Fragment {
         return view;
     }
 
-    private void addLines(String name, double preco, final int id) {
-        LinearLayout linerLayout = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.produtos_layout, mainLayout, false);
+    private void addCards(String name, double preco, final int id) {
+        CardView cardview = (CardView) LayoutInflater.from(getActivity()).inflate(R.layout.produtos_layout, mainLayout, false);
 
-        TextView nomeProduto = linerLayout.findViewById(R.id.txtProduto);
-        TextView precoProduto = linerLayout.findViewById(R.id.txtPreco);
-        ImageView image = linerLayout.findViewById(R.id.imgProduto);
+        TextView nomeProduto = cardview.findViewById(R.id.txtProduto);
+        TextView precoProduto = cardview.findViewById(R.id.txtPreco);
+        ImageView image = cardview.findViewById(R.id.imgProduto);
 
         String url = "https://oficinacordova.azurewebsites.net/android/rest/produto/image/" + id;
         ImageLoader imageLoader = ImageLoader.getInstance();
         imageLoader.init(ImageLoaderConfiguration.createDefault(getActivity()));
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.animation)
-                .showImageForEmptyUri(R.drawable.error24px)
-                .showImageOnFail(R.drawable.error24px)
+                .showImageForEmptyUri(R.drawable.no_image96)
+                .showImageOnFail(R.drawable.no_image96)
                 .cacheInMemory(true)
                 .cacheOnDisk(true)
                 .build();
@@ -113,7 +121,7 @@ public class ItensCategoria extends Fragment {
         nomeProduto.setText(name);
         precoProduto.setText(Util.formatPreco(preco));
 
-        linerLayout.setOnClickListener(new View.OnClickListener() {
+        cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ItemDetailActivity.class);
@@ -122,7 +130,7 @@ public class ItensCategoria extends Fragment {
             }
         });
 
-        mainLayout.addView(linerLayout);
+        mainLayout.addView(cardview);
     }
 
 }

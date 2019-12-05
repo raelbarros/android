@@ -90,8 +90,8 @@ public class ItemDetailActivity extends AppCompatActivity {
 
                     DisplayImageOptions options = new DisplayImageOptions.Builder()
                             .showImageOnLoading(R.drawable.animation)
-                            .showImageForEmptyUri(R.drawable.error24px)
-                            .showImageOnFail(R.drawable.error24px)
+                            .showImageForEmptyUri(R.drawable.no_image96)
+                            .showImageOnFail(R.drawable.no_image96)
                             .cacheInMemory(true)
                             .cacheOnDisk(true)
                             .build();

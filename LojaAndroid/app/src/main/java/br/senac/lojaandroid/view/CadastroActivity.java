@@ -58,6 +58,7 @@ public class CadastroActivity extends AppCompatActivity {
         imageUser = findViewById(R.id.imageUser);
         loader = findViewById(R.id.loader);
 
+        //Mascara dos inputs
         txtCPF.addTextChangedListener(MaskUtil.mask(txtCPF, MaskUtil.FORMAT_CPF));
         txtPhone.addTextChangedListener(MaskUtil.mask(txtPhone, MaskUtil.FORMAT_FONE));
 

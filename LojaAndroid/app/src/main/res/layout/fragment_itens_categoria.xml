@@ -9,6 +9,14 @@
     android:orientation="vertical"
     tools:context=".view.ItensCategoria">
 
+    <TextView
+        android:id="@+id/txtVazio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Categoria Vazia"
+        android:visibility="invisible" />
+
     <ProgressBar
         android:id="@+id/loader"
         style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"

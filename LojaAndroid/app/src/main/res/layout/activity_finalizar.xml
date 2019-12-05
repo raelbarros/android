@@ -114,7 +114,7 @@
                             android:background="@drawable/inputrounded"
                             android:ems="10"
                             android:hint="CEP"
-                            android:inputType="textPersonName"
+                            android:inputType="number|textPostalAddress"
                             android:padding="10dp" />
 
                         <EditText
@@ -280,7 +280,7 @@
                     android:textColor="#fff" />
 
                 <Button
-                    android:id="@+id/button2"
+                    android:id="@+id/btnConfirm"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
