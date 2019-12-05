@@ -5,36 +5,44 @@
         <item
             android:id="@+id/action_home"
             android:checkable="true"
+            android:icon="@drawable/icons8_home"
             android:title="Home" />
         <item
             android:id="@+id/action_compras"
             android:checkable="true"
+            android:icon="@drawable/icons8_carrinho"
             android:title="Compras" />
         <item
             android:checkable="true"
+            android:icon="@drawable/icons8_usuario"
             android:title="Minha Conta">
             <menu>
                 <item
                     android:checkable="true"
+                    android:icon="@drawable/icons8_usuario"
                     android:title="Meus dados" />
             </menu>
         </item>
         <item
             android:checkable="true"
+            android:icon="@drawable/icons8_sobre"
             android:title="Sobre">
             <menu>
                 <item
                     android:checkable="true"
+                    android:icon="@drawable/icons8_sobre"
                     android:title="Sobre" />
             </menu>
         </item>
         <item
             android:checkable="false"
+            android:icon="@drawable/icons8_sair"
             android:title="Sair">
             <menu>
                 <item
                     android:id="@+id/action_logout"
                     android:checkable="false"
+                    android:icon="@drawable/icons8_sair"
                     android:title="Logout" />
             </menu>
         </item>
