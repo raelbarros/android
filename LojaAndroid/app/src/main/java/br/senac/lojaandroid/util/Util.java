@@ -12,6 +12,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import br.senac.lojaandroid.view.CarrinhoActivity;
 
@@ -51,13 +53,27 @@ public class Util {
         return pref;
     }
 
+    //Verifica se existe um usuario logado
     public static boolean checkLogin(Context context){
         return getPreference(context).getBoolean("isLogado", false);
     }
 
+    //Pegar usuario atual
     public static int getCurrentUser(Context context){
         return getPreference(context).getInt("currentUser", 0);
     }
+
+    //Verifica se um item esta vazio
+    public static boolean empty(final String s) {
+        return s == null || s.trim().trim().isEmpty();
+    }
+
+    //Retorna data atual
+    public static String getDateNow(){
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        return  formatter.format(new Date());
+    }
+
 }
 
 //Pega a Instancia do DB

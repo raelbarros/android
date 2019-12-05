@@ -49,12 +49,15 @@ public class CarrinhoActivity extends AppCompatActivity {
         mainLayout = findViewById(R.id.itensLayout);
         btnComprar = findViewById(R.id.btnComprar);
         loader = findViewById(R.id.loader);
-
         loader.setVisibility(View.VISIBLE);
 
+        //Pega a instancia do Singleton
         final Singleton singleton = Singleton.getInstance();
         listaProdutos = singleton.getCarrinho();
 
+        //Verifica se possui item no carrinho
+        //Caso o carrinho esteja vazio, mostra inputVazio
+        //S nao mostra os itens dinaminos
         if (listaProdutos == null || listaProdutos.isEmpty()) {
             txtVazio.setVisibility(View.VISIBLE);
             loader.setVisibility(View.GONE);
@@ -70,6 +73,7 @@ public class CarrinhoActivity extends AppCompatActivity {
             }
         }
 
+        //Btn limpar lista carrinho
         txtLimpar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,9 +82,12 @@ public class CarrinhoActivity extends AppCompatActivity {
             }
         });
 
+        //Btn comprar
         btnComprar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Verifica se o usuario esta logado
+                //Se nao, mostra dialogo para logar ou se cadastrar
                 if (Util.checkLogin(CarrinhoActivity.this)) {
                     Intent intent = new Intent(CarrinhoActivity.this, FinalizarActivity.class);
                     startActivity(intent);
@@ -110,13 +117,14 @@ public class CarrinhoActivity extends AppCompatActivity {
 
     }
 
+    //Atualiza os itens na view
     private void attLayout(List<Produto> list) {
-        double auxPreco = 0;
         double auxTotal = 0;
 
         loader.setVisibility(View.VISIBLE);
         mainLayout.removeAllViews();
 
+        //Caso a lista esteja vazia bloqueia o btnFinalizar
         if (list.isEmpty() || list == null) {
             btnComprar.setEnabled(false);
             loader.setVisibility(View.GONE);
@@ -124,10 +132,8 @@ public class CarrinhoActivity extends AppCompatActivity {
             txtTotal.setText(Util.formatPreco(0.00));
         } else {
             for (Produto p : list) {
-                auxPreco = p.getPrecProduto();
-
-                addLines(p.getNomeProduto(), auxPreco, p.getIdProduto());
-                auxTotal += auxPreco;
+                addLines(p.getNomeProduto(), p.getPrecProduto(), p.getIdProduto());
+                auxTotal += p.getPrecProduto();
             }
             txtTotal.setText(Util.formatPreco(auxTotal));
         }
@@ -147,12 +153,13 @@ public class CarrinhoActivity extends AppCompatActivity {
         imageLoader.init(ImageLoaderConfiguration.createDefault(this));
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.animation)
-                .showImageForEmptyUri(R.drawable.error24px)
-                .showImageOnFail(R.drawable.error24px)
+                .showImageForEmptyUri(R.drawable.no_idea)
+                .showImageOnFail(R.drawable.no_idea)
                 .cacheInMemory(true)
                 .cacheOnDisk(true)
                 .build();
 
+        //Excluir itens do carrinho
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

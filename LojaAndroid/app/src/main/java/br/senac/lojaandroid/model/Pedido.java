@@ -10,12 +10,16 @@ import java.util.List;
 public class Pedido {
 
     @PrimaryKey(autoGenerate = true)
-    private int nunPedido;
+    private long nunPedido;
     private int idCliente;
-    private int nunCartao;
-    private String bandCartao;
-    private String date;
+    private String nunCartao;
+    private int cardCodigo;
+    private String cardVal;
+    private String cep;
     private String endereco;
+    private String bairro;
+    private String date;
+
 
     //@Embedded
     //private List<ItensPedido> listaItensPedido;
@@ -24,11 +28,11 @@ public class Pedido {
 
     }
 
-    public int getNunPedido() {
+    public long getNunPedido() {
         return nunPedido;
     }
 
-    public void setNunPedido(int nunPedido) {
+    public void setNunPedido(long nunPedido) {
         this.nunPedido = nunPedido;
     }
 
@@ -40,20 +44,52 @@ public class Pedido {
         this.idCliente = idCliente;
     }
 
-    public int getNunCartao() {
+    public String getNunCartao() {
         return nunCartao;
     }
 
-    public void setNunCartao(int nunCartao) {
+    public void setNunCartao(String nunCartao) {
         this.nunCartao = nunCartao;
     }
 
-    public String getBandCartao() {
-        return bandCartao;
+    public int getCardCodigo() {
+        return cardCodigo;
     }
 
-    public void setBandCartao(String bandCartao) {
-        this.bandCartao = bandCartao;
+    public void setCardCodigo(int cardCodigo) {
+        this.cardCodigo = cardCodigo;
+    }
+
+    public String getCardVal() {
+        return cardVal;
+    }
+
+    public void setCardVal(String cardVal) {
+        this.cardVal = cardVal;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
     }
 
     public String getDate() {
@@ -64,14 +100,7 @@ public class Pedido {
         this.date = date;
     }
 
-    public String getEndereco() {
-        return endereco;
-    }
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-//
 //    public List<ItensPedido> getListaItensPedido() {
 //        return listaItensPedido;
 //    }

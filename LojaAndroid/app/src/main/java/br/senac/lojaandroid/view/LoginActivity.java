@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -63,6 +64,12 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Cliente> call, Response<Cliente> response) {
                         try {
+                            if(Util.empty(txtEmail.getText().toString()) || Util.empty(txtPasswd.getText().toString())) {
+                                loader.setVisibility(View.GONE);
+
+                                Toast.makeText(LoginActivity.this, "Informe E-mail e Senha", Toast.LENGTH_LONG).show();
+                                return;
+                            }
                             if (response.code() == 200) {
                                 Cliente clientResp = response.body();
 
@@ -73,16 +80,21 @@ public class LoginActivity extends AppCompatActivity {
                                 editor.apply();
 
                                 LojaDatabase appDB = LojaDatabase.getInstance(LoginActivity.this);
-
                                 List<Cliente> listaCliente = appDB.clienteDao().getAllCliente();
 
                                 //Verifica se ja existe o cliente no SQLITE
-                                for (Cliente c : listaCliente) {
-                                    if (c.getIdCliente() == clientResp.getIdCliente()) {
-                                        appDB.clienteDao().updateCliente(clientResp);
-                                    } else {
-                                        // Salva o Cliente no SQLLite
-                                        appDB.clienteDao().insertCliente(clientResp);
+                                //Se a lista estiver vazia eh o primeiro cliente
+                                if (listaCliente.isEmpty() || listaCliente == null) {
+                                    // Salva o Cliente no SQLLite
+                                    appDB.clienteDao().insertCliente(clientResp);
+                                } else {
+                                    for (Cliente c : listaCliente) {
+                                        if (c.getIdCliente() == clientResp.getIdCliente()) {
+                                            appDB.clienteDao().updateCliente(clientResp);
+                                        } else {
+                                            // Salva o Cliente no SQLLite
+                                            appDB.clienteDao().insertCliente(clientResp);
+                                        }
                                     }
                                 }
 
@@ -91,9 +103,14 @@ public class LoginActivity extends AppCompatActivity {
                                 // Retorna para a pagina Inicial
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
+                            } else {
+                                loader.setVisibility(View.GONE);
+                                Toast.makeText(LoginActivity.this, "Dados Invalidos!", Toast.LENGTH_LONG).show();
                             }
-                        }catch (Throwable t) {
-
+                        } catch (Throwable t) {
+                            t.printStackTrace();
+                            loader.setVisibility(View.GONE);
+                            Toast.makeText(LoginActivity.this, "Falha de conexao!", Toast.LENGTH_LONG).show();
                         }
 
                     }

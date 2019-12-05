@@ -14,9 +14,7 @@ public class Produto {
         return descontoPromocao;
     }
 
-    public void setDescontoPromocao(double descontoPromocao) {
-        this.descontoPromocao = descontoPromocao;
-    }
+    public void setDescontoPromocao(double descontoPromocao) { this.descontoPromocao = descontoPromocao; }
 
     public double getPrecProduto() {
         return precProduto;

@@ -17,7 +17,7 @@ public interface PedidoDao {
     List<Pedido> getAllPedido();
 
     @Insert
-    void insertPedido(Pedido pedido);
+    long insertPedido(Pedido pedido);
 
     @Update
     void updatePedido(Pedido pedido);

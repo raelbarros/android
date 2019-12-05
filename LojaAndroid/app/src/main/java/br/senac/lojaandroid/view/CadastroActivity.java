@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
@@ -27,6 +28,7 @@ import br.senac.lojaandroid.model.Cliente;
 import br.senac.lojaandroid.util.LojaDatabase;
 import br.senac.lojaandroid.util.MaskUtil;
 import br.senac.lojaandroid.util.Util;
+import br.senac.lojaandroid.validador.ValidadorCliente;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -86,6 +88,9 @@ public class CadastroActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Cliente> call, Response<Cliente> response) {
                         try {
+                            //Valida o obj cliente
+                            ValidadorCliente.validate(cliente);
+
                             if (response.code() == 200) {
                                 Cliente clienteResp = response.body();
 
@@ -108,9 +113,14 @@ public class CadastroActivity extends AppCompatActivity {
                                 // Retorna para a pagina Inicial
                                 Intent intent = new Intent(CadastroActivity.this, MainActivity.class);
                                 startActivity(intent);
+                            } else {
+                                loader.setVisibility(View.GONE);
+                                Toast.makeText(CadastroActivity.this, "Falha de conexao!", Toast.LENGTH_LONG).show();
                             }
-                        } catch (Exception t) {
-
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            loader.setVisibility(View.GONE);
+                            Toast.makeText(CadastroActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                         }
                     }
 

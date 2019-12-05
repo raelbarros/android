@@ -42,7 +42,7 @@ public class ItensCategoria extends Fragment {
 
     private ViewGroup mainLayout;
     private ProgressBar loader;
-    private TextView txtVazio;
+    private TextView txtVazio, txtTitleCategoria;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,6 +54,7 @@ public class ItensCategoria extends Fragment {
         loader = view.findViewById(R.id.loader);
 
         txtVazio = view.findViewById(R.id.txtVazio);
+        txtTitleCategoria = view.findViewById(R.id.titleCategoria);
 
         final int id = getArguments().getInt("id");
 
@@ -62,8 +63,10 @@ public class ItensCategoria extends Fragment {
         if (getActivity() instanceof MainActivity) {
             MainActivity mainActivity = (MainActivity) getActivity();
             mainActivity.setTitle(title);
+            txtTitleCategoria.setText(title);
         }
 
+        //Mostra Progress Bar
         loader.setVisibility(View.VISIBLE);
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -79,6 +82,8 @@ public class ItensCategoria extends Fragment {
             public void onResponse(Call<List<Produto>> call, Response<List<Produto>> response) {
                 List<Produto> listaProduto = response.body();
 
+                //Se a lista de produtos estiver fazia, mostra txtVazio
+                //Se nao, mostra cards Dinamicos
                 if (listaProduto.isEmpty() || listaProduto == null) {
                     txtVazio.setVisibility(View.VISIBLE);
                 } else {
